@@ -37,13 +37,17 @@
   --page-b: #212429;
   --page-c: #262a30;
   --surface: #25282d;
-  --well: #15171a;
+  --well: #1c1f23;
   --face-a: #343a42;
   --face-b: #1d2024;
   --ridge: #3d424a;
   --sky-b: #5e93b9;
   --brass-b: #b08a4f;
   --tag: rgba(255, 255, 255, 0.08);
+  --sky-text: #8cc7e8;
+  --sky-text-b: #6ba8cc;
+  --brass-text: #e0b878;
+  --brass-text-b: #bd9557;
 
   --hi: rgba(255, 255, 255, 0.055);
   --hi-strong: rgba(255, 255, 255, 0.10);
@@ -85,13 +89,17 @@
   --page-b: #fbfeff;
   --page-c: #eff7fe;
   --surface: #fafeff;
-  --well: #dfeaf6;
+  --well: #f1f5fa;
   --face-a: #ffffff;
-  --face-b: #eef5fc;
+  --face-b: #f8fbfe;
   --ridge: #ccdae7;
-  --sky-b: #3a749a;
-  --brass-b: #7d5f27;
+  --sky-b: #2b86b8;
+  --brass-b: #9a7128;
   --tag: rgba(66, 104, 140, 0.14);
+  --sky-text: #217aa8;
+  --sky-text-b: #175d84;
+  --brass-text: #8d6a22;
+  --brass-text-b: #6f521a;
 
   --hi: rgba(255, 255, 255, 1);
   --hi-strong: #ffffff;
@@ -99,13 +107,13 @@
   --lo-strong: rgba(110, 152, 194, 0.34);
 
   --ridge-lit: rgba(255, 255, 255, 1);
-  --ridge-shade: rgba(88, 128, 170, 0.62);
+  --ridge-shade: rgba(96, 134, 174, 0.5);
   --r1: #6f9cbb;
   --r2: #a8b8c5;
   --r3: #ad8a4e;
-  --groove: #e7f2fb;
-  --sky-glow: rgba(58, 134, 186, 0.5);
-  --brass-glow: rgba(150, 110, 38, 0.45);
+  --groove: #eaf0f6;
+  --sky-glow: rgba(63, 163, 214, 0.52);
+  --brass-glow: rgba(192, 143, 57, 0.46);
 
   --text-a: #2b3945;
   --text-b: #42525f;
@@ -114,16 +122,16 @@
   --dim-a: #8ea6b6;
   --dim-b: #adc1d1;
 
-  --sky: #4a8cb5;
-  --brass: #9a7530;
-  --sky-soft: rgba(74, 140, 181, 0.18);
-  --brass-soft: rgba(154, 117, 48, 0.16);
+  --sky: #3fa3d6;
+  --brass: #c08f39;
+  --sky-soft: rgba(63, 163, 214, 0.18);
+  --brass-soft: rgba(192, 143, 57, 0.16);
 
   --wash-1: rgba(115, 170, 210, 0.075);
   --wash-2: rgba(185, 150, 90, 0.035);
 
-  --col-a: #7cb0d2;
-  --col-acc: #a8813a;
+  --col-a: #7cc3e8;
+  --col-acc: #cfa04a;
   --spark-line: #9fb3c1;
 }
 
@@ -242,14 +250,14 @@ body::before {
 .ctl-note,
 .gauge figcaption,
 .sheet thead th { background-image: linear-gradient(180deg, var(--dim-a), var(--dim-b)); }
-.ctl-value { background-image: linear-gradient(170deg, var(--sky), var(--sky-b)); }
+.ctl-value { background-image: linear-gradient(170deg, var(--sky-text), var(--sky-text-b)); }
 .switch-text { background-image: linear-gradient(180deg, var(--body-a), var(--body-b)); }
 .sheet tbody th { background-image: linear-gradient(170deg, var(--text-b), var(--body-a)); }
 .sheet td { background-image: linear-gradient(180deg, var(--body-a), var(--body-b)); }
-.sheet .up { background-image: linear-gradient(180deg, var(--sky), var(--sky-b)); }
+.sheet .up { background-image: linear-gradient(180deg, var(--sky-text), var(--sky-text-b)); }
 .sheet .down { background-image: linear-gradient(180deg, var(--dim-a), var(--dim-b)); }
 .sheet .accent,
-.sheet .up.accent { background-image: linear-gradient(180deg, var(--brass), var(--brass-b)); }
+.sheet .up.accent { background-image: linear-gradient(180deg, var(--brass-text), var(--brass-text-b)); }
 
 /* 항목 사이의 얕은 단차 — 상자가 아니라 한 줄의 결 */
 .note,
@@ -476,8 +484,8 @@ main,
 .c-read b {
   font-weight: 500;
   letter-spacing: 0.04em;
-  -webkit-text-fill-color: var(--sky);
-  color: var(--sky);
+  -webkit-text-fill-color: var(--sky-text);
+  color: var(--sky-text);
 }
 
 .chart svg {
@@ -572,7 +580,7 @@ main,
   font-size: 21px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  fill: var(--brass);
+  fill: var(--brass-text);
 }
 
 /* 기둥 — 위가 밝고 아래로 어두워지는 원통 */
@@ -731,7 +739,7 @@ main,
   font-weight: 400;
   fill: var(--text-b);
 }
-.gauge.is-accent .g-num { fill: var(--brass); }
+.gauge.is-accent .g-num { fill: var(--brass-text); }
 
 .gauge figcaption {
   margin-top: 0.3rem;
