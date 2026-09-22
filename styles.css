@@ -301,46 +301,42 @@ body::before {
 }
 .sheet tbody tr:first-child { background-image: none; }
 
-/* 좌우 여백의 계단 지형 — 넓은 화면에서만 */
+/* 좌우 여백의 계단 조각 — 넓은 화면에서만, 가장자리에서 조금씩 솟는다 */
 .decor {
   display: none;
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   overflow: hidden;
   pointer-events: none;
 }
 
 .dec {
   position: absolute;
-  width: calc((100vw - min(1120px, 88vw)) / 2 - 38px);
+  overflow: hidden;
+  width: min(var(--w, 150px), calc((100vw - min(1120px, 88vw)) / 2 - 26px));
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
 }
 
 .dec svg {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  overflow: visible;
 }
 
-.dec-left {
-  left: 0;
-  top: 104vh;
-  height: 168vh;
-}
+.dec-left { left: 0; }
+.dec-right { right: 0; }
+.dec-right svg,
+.dec-flip svg { transform: scaleX(-1); }
+.dec-right.dec-flip svg { transform: none; }
 
-.dec-right {
-  right: 0;
-  top: 286vh;
-  height: 128vh;
-}
+.dec-l1 { z-index: 1; }
+.dec-l2 { z-index: 2; }
 
-.dec-low {
-  left: 0;
-  top: 452vh;
-  height: 52vh;
-}
-
-.dec-face { stroke: none; }
+.dec-face { stroke: none; filter: drop-shadow(2px 5px 6px var(--lo)); }
+.dec-l2 .dec-face { filter: drop-shadow(4px 9px 12px var(--lo)); }
 .dec-face.t1 { fill: var(--tier-1); }
 .dec-face.t2 { fill: var(--tier-2); }
 .dec-face.t3 { fill: var(--tier-3); }
@@ -349,8 +345,8 @@ body::before {
 .dec-edge {
   fill: none;
   stroke: var(--tier-edge);
-  stroke-width: 1.4;
-  opacity: 0.75;
+  stroke-width: 1.3;
+  opacity: 0.7;
 }
 
 @media (min-width: 1380px) {
@@ -405,6 +401,7 @@ main,
 }
 
 .top {
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
