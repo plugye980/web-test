@@ -162,39 +162,6 @@
     paint();
   }
 
-  var area = document.querySelector(".c-area");
-  setupRail(document.getElementById("rangeRail"), function (pos, knobs, rail) {
-    if (!area) return;
-    var box = rail.getBoundingClientRect();
-    var inset = box.width ? 11 / box.width : 0;
-    ["a", "b"].forEach(function (key, i) {
-      var x = PLOT_X0 + PLOT_W * (inset + pos[i] * (1 - 2 * inset));
-      var v = valueAt(pos[i]);
-      var line = area.querySelector(".cursor-" + key);
-      var dot = area.querySelector(".cursor-dot-" + key);
-      if (line) {
-        line.setAttribute("x1", x.toFixed(1));
-        line.setAttribute("x2", x.toFixed(1));
-      }
-      if (dot) {
-        dot.setAttribute("cx", x.toFixed(1));
-        dot.setAttribute("cy", (PLOT_TOP + (95 - v) * PLOT_UNIT).toFixed(1));
-      }
-      var month = Math.round(pos[i] * (MONTHS - 1)) + 1;
-      knobs[i].setAttribute("aria-valuenow", String(month));
-      knobs[i].setAttribute("aria-valuetext", month + "월");
-    });
-    var read = document.getElementById("rangeRead");
-    if (read) {
-      var m1 = Math.round(pos[0] * (MONTHS - 1)) + 1;
-      var m2 = Math.round(pos[1] * (MONTHS - 1)) + 1;
-      var sum = 0;
-      for (var m = m1; m <= m2; m++) sum += VALUES[m - 1];
-      read.innerHTML =
-        m1 + "월 – " + m2 + "월 · 평균 <b>" + (sum / (m2 - m1 + 1)).toFixed(1) + "</b>";
-    }
-  });
-
   var soloRead = document.getElementById("soloRead");
   setupRail(document.getElementById("soloRail"), function (pos, knobs) {
     var v = Math.round(pos[0] * 100);

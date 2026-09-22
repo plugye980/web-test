@@ -33,13 +33,20 @@
         <stop class="g-r2" offset="52%" />
         <stop class="g-r3" offset="100%" />
       </linearGradient>
+      <linearGradient id="ridgeDeep" x1="0" y1="0" x2="1" y2="0">
+        <stop class="g-d1" offset="0%" />
+        <stop class="g-d2" offset="52%" />
+        <stop class="g-d3" offset="100%" />
+      </linearGradient>
       <linearGradient id="colFace" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-col-a" offset="0%" stop-opacity="0.9" />
-        <stop class="g-col-a" offset="100%" stop-opacity="0.05" />
+        <stop class="g-col-lit" offset="0%" />
+        <stop class="g-col-a" offset="16%" stop-opacity="0.92" />
+        <stop class="g-col-a" offset="100%" stop-opacity="0.06" />
       </linearGradient>
       <linearGradient id="colFaceAccent" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-acc-a" offset="0%" stop-opacity="0.95" />
-        <stop class="g-acc-a" offset="100%" stop-opacity="0.06" />
+        <stop class="g-col-lit" offset="0%" />
+        <stop class="g-acc-a" offset="16%" stop-opacity="0.96" />
+        <stop class="g-acc-a" offset="100%" stop-opacity="0.07" />
       </linearGradient>
 
       <!-- 색수차 — 데이터의 가장자리에만, 눈에 띄지 않게 -->
@@ -112,7 +119,7 @@
       <figure class="chart reveal">
         <figcaption>
           <span class="c-title">월별 밀도</span>
-          <span class="c-read" id="rangeRead">5월 – 10월 · 평균 <b>66.0</b></span>
+          <span class="c-note">2026 · 12개월 · 지표 0 – 100</span>
         </figcaption>
 
         <div class="well">
@@ -122,10 +129,8 @@
             <path class="ridge-lit" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
             <path class="ridge" fill="none" stroke="url(#ridgeLine)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
 
-            <line class="cursor cursor-a" x1="341.6" y1="0" x2="341.6" y2="300" />
-            <line class="cursor cursor-b" x1="669.6" y1="0" x2="669.6" y2="300" />
-            <circle class="cursor-dot cursor-dot-a" cx="341.6" cy="139.0" r="3.4" />
-            <circle class="cursor-dot cursor-dot-b" cx="669.6" cy="97.0" r="3.4" />
+            <path class="ridge-mark" fill="none" stroke="url(#ridgeDeep)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+            <path class="ridge-mark ridge-mark-b" fill="none" stroke="url(#ridgeDeep)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
 
             <text class="v-tag" x="838" y="284" text-anchor="end">DENSITY</text>
             <text class="v-axis" x="44" y="284">1월</text>
@@ -133,14 +138,6 @@
           </svg>
         </div>
 
-        <div class="rail" id="rangeRail">
-          <span class="rail-groove" aria-hidden="true"></span>
-          <span class="rail-fill" aria-hidden="true"></span>
-          <button type="button" class="knob" data-knob="a" style="--p: 38%"
-            role="slider" aria-label="구간 시작" aria-valuemin="1" aria-valuemax="12" aria-valuenow="5"></button>
-          <button type="button" class="knob" data-knob="b" style="--p: 78%"
-            role="slider" aria-label="구간 끝" aria-valuemin="1" aria-valuemax="12" aria-valuenow="10"></button>
-        </div>
       </figure>
 
       <div class="duo">

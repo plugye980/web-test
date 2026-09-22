@@ -44,6 +44,7 @@
   --sky-b: #5e93b9;
   --brass-b: #b08a4f;
   --tag: rgba(255, 255, 255, 0.08);
+  --col-lit: rgba(255, 255, 255, 0.5);
   --sky-text: #8cc7e8;
   --sky-text-b: #6ba8cc;
   --brass-text: #e0b878;
@@ -59,6 +60,9 @@
   --r1: #6f9dbb;
   --r2: #99a4b1;
   --r3: #c49c5f;
+  --d1: #47738f;
+  --d2: #6d7784;
+  --d3: #90703f;
   --groove: #15171a;
   --sky-glow: rgba(123, 185, 222, 0.55);
   --brass-glow: rgba(211, 168, 105, 0.5);
@@ -89,13 +93,14 @@
   --page-b: #fbfeff;
   --page-c: #eff7fe;
   --surface: #fafeff;
-  --well: #f1f5fa;
-  --face-a: #ffffff;
-  --face-b: #f8fbfe;
+  --well: #ffffff;
+  --face-a: #f1f7fd;
+  --face-b: #fafcff;
   --ridge: #ccdae7;
   --sky-b: #2b86b8;
   --brass-b: #9a7128;
   --tag: rgba(66, 104, 140, 0.14);
+  --col-lit: rgba(255, 255, 255, 0.95);
   --sky-text: #217aa8;
   --sky-text-b: #175d84;
   --brass-text: #8d6a22;
@@ -107,10 +112,13 @@
   --lo-strong: rgba(110, 152, 194, 0.34);
 
   --ridge-lit: rgba(255, 255, 255, 1);
-  --ridge-shade: rgba(96, 134, 174, 0.5);
+  --ridge-shade: rgba(104, 142, 182, 0.45);
   --r1: #6f9cbb;
   --r2: #a8b8c5;
   --r3: #ad8a4e;
+  --d1: #42718f;
+  --d2: #7b8896;
+  --d3: #7d6232;
   --groove: #eaf0f6;
   --sky-glow: rgba(63, 163, 214, 0.52);
   --brass-glow: rgba(192, 143, 57, 0.46);
@@ -509,6 +517,10 @@ main,
 .g-r1 { stop-color: var(--r1); }
 .g-r2 { stop-color: var(--r2); }
 .g-r3 { stop-color: var(--r3); }
+.g-d1 { stop-color: var(--d1); }
+.g-d2 { stop-color: var(--d2); }
+.g-d3 { stop-color: var(--d3); }
+.g-col-lit { stop-color: var(--col-lit); }
 
 /* 능선 — 윗면은 빛을 받고, 그 바로 아래는 그늘이 진다 */
 .ridge {
@@ -531,15 +543,18 @@ main,
   filter: blur(4.5px);
 }
 
-/* 지금 보고 있는 구간 */
-.cursor {
-  stroke-width: 1.2;
-  opacity: 0.9;
+/* 마디 — 같은 색 계열의 조금 더 낮은 명도 */
+.ridge-mark {
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-dasharray: 165 9999;
+  stroke-dashoffset: -258;
 }
-.cursor-a { stroke: var(--sky); filter: drop-shadow(0 0 6px var(--sky-glow)); }
-.cursor-b { stroke: var(--brass); filter: drop-shadow(0 0 6px var(--brass-glow)); }
-.cursor-dot-a { fill: var(--sky); filter: drop-shadow(0 0 7px var(--sky-glow)); }
-.cursor-dot-b { fill: var(--brass); filter: drop-shadow(0 0 7px var(--brass-glow)); }
+
+.ridge-mark-b {
+  stroke-dasharray: 96 9999;
+  stroke-dashoffset: -612;
+}
 
 .v-tag-sm { font-size: 26px; }
 
@@ -586,7 +601,7 @@ main,
 /* 기둥 — 위가 밝고 아래로 어두워지는 원통 */
 .c-cols rect {
   fill: url(#colFace);
-  filter: drop-shadow(0 10px 14px var(--lo));
+  filter: drop-shadow(2px 9px 10px var(--lo-strong));
   transform-box: fill-box;
   transform-origin: bottom;
   transform: scaleY(0.02);
