@@ -80,28 +80,28 @@
 
 /* 라이트 — 푸른 기운이 도는 밝은 흰색 바탕 */
 :root[data-theme="light"] {
-  --page-a: #f0f9ff;
-  --page-b: #f7fdff;
-  --page-c: #e9f4fd;
-  --surface: #f5fcff;
-  --well: #eaf4fc;
-  --face-a: #e3edf7;
-  --face-b: #d6e5f1;
-  --ridge: #c2d2e0;
+  --page-a: #f5fbff;
+  --page-b: #fbfeff;
+  --page-c: #eff7fe;
+  --surface: #fafeff;
+  --well: #f0f8fe;
+  --face-a: #ecf4fc;
+  --face-b: #dfedf8;
+  --ridge: #ccdae7;
   --sky-b: #3a749a;
   --brass-b: #7d5f27;
 
   --hi: rgba(255, 255, 255, 1);
   --hi-strong: #ffffff;
-  --lo: rgba(120, 158, 196, 0.3);
-  --lo-strong: rgba(104, 145, 186, 0.42);
+  --lo: rgba(124, 164, 204, 0.24);
+  --lo-strong: rgba(110, 152, 194, 0.34);
 
   --ridge-lit: rgba(255, 255, 255, 1);
-  --ridge-shade: rgba(120, 155, 190, 0.5);
+  --ridge-shade: rgba(126, 162, 198, 0.4);
   --r1: #6f9cbb;
   --r2: #a8b8c5;
   --r3: #ad8a4e;
-  --groove: #dcebf7;
+  --groove: #e7f2fb;
   --sky-glow: rgba(58, 134, 186, 0.5);
   --brass-glow: rgba(150, 110, 38, 0.45);
 
@@ -109,18 +109,18 @@
   --text-b: #42525f;
   --body-a: #53616c;
   --body-b: #6c7a86;
-  --dim-a: #8ba0ad;
-  --dim-b: #a9bccb;
+  --dim-a: #8ea6b6;
+  --dim-b: #adc1d1;
 
   --sky: #4a8cb5;
   --brass: #9a7530;
   --sky-soft: rgba(74, 140, 181, 0.18);
   --brass-soft: rgba(154, 117, 48, 0.16);
 
-  --wash-1: rgba(110, 165, 205, 0.1);
-  --wash-2: rgba(180, 145, 85, 0.045);
+  --wash-1: rgba(115, 170, 210, 0.075);
+  --wash-2: rgba(185, 150, 90, 0.035);
 
-  --col-a: #6ba3c8;
+  --col-a: #7cb0d2;
   --col-acc: #a8813a;
   --spark-line: #9fb3c1;
 }
