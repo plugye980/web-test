@@ -48,9 +48,10 @@
   --inset-lo: rgba(0, 0, 0, 0.34);
   --edge-lo: rgba(0, 0, 0, 0.45);
   --well-2: #202327;
-  --tier-1: #31373f;
-  --tier-2: #272d34;
-  --tier-3: #1e2228;
+  --tier-1: #2f353c;
+  --tier-2: #2a3037;
+  --tier-3: #252a31;
+  --tier-edge: #474f59;
   --sky-text: #8cc7e8;
   --sky-text-b: #6ba8cc;
   --brass-text: #e0b878;
@@ -130,8 +131,9 @@
   --edge-lo: rgba(112, 150, 192, 0.42);
   --well-2: #f2f6fb;
   --tier-1: #f8fcff;
-  --tier-2: #eff6fd;
-  --tier-3: #e5f0fa;
+  --tier-2: #f3f9fe;
+  --tier-3: #eef6fd;
+  --tier-edge: #c2d7e9;
   --sky-glow: rgba(63, 163, 214, 0.52);
   --brass-glow: rgba(192, 143, 57, 0.46);
 
@@ -298,29 +300,33 @@ body::before {
 }
 .sheet tbody tr:first-child { background-image: none; }
 
-/* 계단 — 장식이자 구분. 어떤 단은 고르고 어떤 단은 어긋난다 */
+/* 계단 — 장식도 실제로 한 단 올라오거나 내려간다 */
 .stair {
   position: relative;
-  height: 15px;
-  margin-bottom: 2.2rem;
+  height: 26px;
+  margin-bottom: 2.6rem;
 }
 
 .stair i {
   position: absolute;
-  height: 2px;
-  background-image: var(--edge);
-  background-size: 100% 1px, 100% 1px;
-  background-position: 0 0, 0 1px;
-  background-repeat: no-repeat;
+  height: 9px;
+  border-radius: 5px;
+  background: var(--surface);
+  box-shadow: var(--raise);
 }
 
-.stair i:nth-child(1) { left: 0; width: 27%; top: 0; }
-.stair i:nth-child(2) { left: 27%; width: 21%; top: 6px; }
-.stair i:nth-child(3) { left: 48%; width: 52%; top: 12px; }
+.stair i:nth-child(2) {
+  background: var(--well-2);
+  box-shadow: var(--inset-sm);
+}
+
+.stair i:nth-child(1) { left: 0; width: 30%; top: 0; }
+.stair i:nth-child(2) { left: 30%; width: 26%; top: 8px; }
+.stair i:nth-child(3) { left: 56%; width: 44%; top: 16px; }
 
 .stair-even i:nth-child(1) { left: 0; width: 33.33%; top: 0; }
-.stair-even i:nth-child(2) { left: 33.33%; width: 33.33%; top: 6px; }
-.stair-even i:nth-child(3) { left: 66.66%; width: 33.34%; top: 12px; }
+.stair-even i:nth-child(2) { left: 33.33%; width: 33.33%; top: 8px; }
+.stair-even i:nth-child(3) { left: 66.66%; width: 33.34%; top: 16px; }
 
 .stair-foot {
   position: relative;
@@ -330,7 +336,7 @@ body::before {
   margin-bottom: 0;
 }
 
-.band > .stair { grid-column: 1 / -1; }
+.band > .stair { grid-column: 2; }
 
 /* 레이아웃 */
 .top,
@@ -601,15 +607,21 @@ main,
   stroke: var(--ridge-lit);
   stroke-width: 1.1;
   stroke-linecap: round;
-  opacity: 0.42;
-  transform: translateY(-1.1px);
+  opacity: 0.3;
+  transform: translateY(-1.4px);
+}
+
+.step-edge {
+  stroke: var(--tier-edge);
+  stroke-width: 1.4;
+  stroke-linecap: round;
 }
 
 .step-shade {
   stroke: var(--ridge-shade);
   stroke-width: 6;
   stroke-linecap: round;
-  opacity: 0.62;
+  opacity: 0.5;
   transform: translate(1.5px, 4px);
   filter: blur(4px);
 }
