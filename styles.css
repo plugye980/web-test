@@ -45,6 +45,11 @@
   --brass-b: #b08a4f;
   --tag: rgba(255, 255, 255, 0.08);
   --col-lit: rgba(255, 255, 255, 0.5);
+  --inset-lo: rgba(0, 0, 0, 0.34);
+  --well-2: #202327;
+  --tier-1: #2f353c;
+  --tier-2: #272c33;
+  --tier-3: #1f2329;
   --sky-text: #8cc7e8;
   --sky-text-b: #6ba8cc;
   --brass-text: #e0b878;
@@ -120,6 +125,11 @@
   --d2: #7b8896;
   --d3: #7d6232;
   --groove: #eaf0f6;
+  --inset-lo: rgba(116, 152, 192, 0.32);
+  --well-2: #f2f6fb;
+  --tier-1: #f7fbff;
+  --tier-2: #f0f6fd;
+  --tier-3: #e9f2fb;
   --sky-glow: rgba(63, 163, 214, 0.52);
   --brass-glow: rgba(192, 143, 57, 0.46);
 
@@ -146,8 +156,9 @@
 :root {
   --raise: 0 3px 7px var(--lo), 0 -1px 1px var(--hi);
   --raise-lg: 0 14px 28px var(--lo), 0 -1px 2px var(--hi);
-  --inset: inset 0 4px 9px var(--lo), inset 0 -2px 3px var(--hi);
-  --inset-sm: inset 0 2px 5px var(--lo), inset 0 -1px 2px var(--hi);
+  --inset: inset 0 3px 7px var(--inset-lo), inset 0 -2px 3px var(--hi),
+    inset 0 17px 20px -15px var(--inset-lo);
+  --inset-sm: inset 0 2px 5px var(--inset-lo), inset 0 -1px 2px var(--hi);
   --press: inset 0 3px 6px var(--lo-strong), inset 0 -1px 2px var(--hi);
   --lit-text: drop-shadow(0 -1px 0 var(--hi)) drop-shadow(0 3px 6px var(--lo));
   --lit-text-sm: drop-shadow(0 -1px 0 var(--hi)) drop-shadow(0 2px 4px var(--lo));
@@ -462,7 +473,10 @@ main,
   overflow: hidden;
 }
 
-.well-flat { padding: 1.6rem 1.2rem 1rem; }
+.well-flat {
+  background: var(--well-2);
+  padding: 1.6rem 1.2rem 1rem;
+}
 
 .chart figcaption {
   display: flex;
@@ -505,8 +519,8 @@ main,
 
 .c-area { overflow: hidden; }
 
-.g-face { stop-color: var(--face-a); }
-.g-face-b { stop-color: var(--face-b); }
+.g-face { stop-color: var(--tier-1); }
+.g-face-b { stop-color: var(--tier-1); }
 .g-face-c { stop-color: var(--face-b); }
 .g-amb-a { stop-color: var(--amb-a); }
 .g-amb-b { stop-color: var(--amb-b); }
@@ -541,6 +555,27 @@ main,
   stroke-linecap: round;
   transform: translate(2px, 6px);
   filter: blur(4.5px);
+}
+
+/* 계단 — 2~4단, 단마다 아주 얕은 톤 차이 */
+.step-face { fill: var(--tier-2); }
+.step-face.step-c { fill: var(--tier-3); }
+
+.step-lit {
+  stroke: var(--ridge-lit);
+  stroke-width: 1;
+  stroke-linecap: round;
+  opacity: 0.28;
+  transform: translateY(-1px);
+}
+
+.step-shade {
+  stroke: var(--ridge-shade);
+  stroke-width: 6;
+  stroke-linecap: round;
+  opacity: 0.5;
+  transform: translate(1.5px, 4px);
+  filter: blur(4px);
 }
 
 /* 마디 — 같은 색 계열의 조금 더 낮은 명도 */
