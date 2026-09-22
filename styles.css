@@ -38,9 +38,9 @@
   --page-c: #262a30;
   --surface: #25282d;
   --well: #1e2025;
-  --face-a: rgba(0, 0, 0, 0.3);
-  --face-b: rgba(0, 0, 0, 0.1);
-  --lift: rgba(190, 220, 245, 0.16);
+  --face-a: #191b1f;
+  --face-b: #131518;
+  --ridge: #3d424a;
   --sky-b: #5e93b9;
   --brass-b: #b08a4f;
 
@@ -50,7 +50,7 @@
   --lo-strong: rgba(0, 0, 0, 0.7);
 
   --ridge-lit: rgba(255, 255, 255, 0.4);
-  --ridge-shade: rgba(0, 0, 0, 0.55);
+  --ridge-shade: rgba(0, 0, 0, 0.6);
   --r1: #6f9dbb;
   --r2: #99a4b1;
   --r3: #c49c5f;
@@ -85,9 +85,9 @@
   --page-c: #e9f4fd;
   --surface: #f5fcff;
   --well: #eaf4fc;
-  --face-a: rgba(116, 156, 196, 0.2);
-  --face-b: rgba(116, 156, 196, 0.02);
-  --lift: rgba(255, 255, 255, 0.95);
+  --face-a: #e3edf7;
+  --face-b: #d6e5f1;
+  --ridge: #c2d2e0;
   --sky-b: #3a749a;
   --brass-b: #7d5f27;
 
@@ -97,7 +97,7 @@
   --lo-strong: rgba(104, 145, 186, 0.42);
 
   --ridge-lit: rgba(255, 255, 255, 1);
-  --ridge-shade: rgba(106, 146, 190, 0.5);
+  --ridge-shade: rgba(120, 155, 190, 0.5);
   --r1: #6f9cbb;
   --r2: #a8b8c5;
   --r3: #ad8a4e;
@@ -205,6 +205,7 @@ body::before {
 .r,
 .c-title,
 .c-note,
+.c-read,
 .ctl-label,
 .ctl-value,
 .ctl-note,
@@ -234,6 +235,7 @@ body::before {
 /* 톤 기울기 — 같은 색에서 농도만 내려간다 */
 .c-title { background-image: linear-gradient(170deg, var(--text-b), var(--body-b)); }
 .c-note,
+.c-read,
 .ctl-label,
 .ctl-note,
 .gauge figcaption,
@@ -434,11 +436,12 @@ main,
 /* 데이터 */
 .chart { margin-top: var(--gap-3); }
 
-/* 한 단 낮은 면 — 기둥이 놓이는 자리 */
+/* 한 단 낮은 면 — 그래프가 놓이는 자리 */
 .well {
   background: var(--well);
   border-radius: var(--radius);
   box-shadow: var(--inset);
+  overflow: hidden;
 }
 
 .well-flat { padding: 1.6rem 1.2rem 1rem; }
@@ -458,9 +461,21 @@ main,
   letter-spacing: 0.02em;
 }
 
-.c-note {
+.c-note,
+.c-read {
   font-size: var(--step-5);
   letter-spacing: 0.16em;
+}
+
+.c-read {
+  background-image: linear-gradient(180deg, var(--dim-a), var(--dim-b));
+}
+
+.c-read b {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  -webkit-text-fill-color: var(--sky);
+  color: var(--sky);
 }
 
 .chart svg {
@@ -470,9 +485,11 @@ main,
   overflow: visible;
 }
 
+.c-area { overflow: hidden; }
+
 .g-face { stop-color: var(--face-a); }
 .g-face-b { stop-color: var(--face-b); }
-.g-face-c { stop-color: transparent; }
+.g-face-c { stop-color: var(--face-b); }
 .g-amb-a { stop-color: var(--amb-a); }
 .g-amb-b { stop-color: var(--amb-b); }
 .g-amb-c { stop-color: var(--amb-c); }
@@ -483,7 +500,7 @@ main,
 .g-r2 { stop-color: var(--r2); }
 .g-r3 { stop-color: var(--r3); }
 
-/* 능선 — 선이 튀어나와 있다. 위로는 빛이 새고, 아래로는 그늘이 진다 */
+/* 능선 — 윗면은 빛을 받고, 그 바로 아래는 그늘이 진다 */
 .ridge {
   stroke-width: 2.4;
   stroke-linecap: round;
@@ -491,33 +508,35 @@ main,
 
 .ridge-lit {
   stroke: var(--ridge-lit);
-  stroke-width: 1.6;
+  stroke-width: 1.8;
   stroke-linecap: round;
-  transform: translateY(-1.6px);
+  transform: translateY(-1.7px);
 }
 
-.ridge-up {
-  stroke-width: 13;
-  stroke-linecap: round;
-  opacity: 0.3;
-  transform: translateY(-9px);
-  filter: blur(9px);
-}
-
-.ridge-cast {
+.ridge-shade {
   stroke: var(--ridge-shade);
   stroke-width: 7;
   stroke-linecap: round;
-  transform: translateY(7px);
-  filter: blur(7px);
+  transform: translateY(5px);
+  filter: blur(4px);
 }
 
-.ridge-halo {
-  stroke: var(--lift);
-  stroke-width: 7;
-  stroke-linecap: round;
-  transform: translateY(-5px);
-  filter: blur(7px);
+/* 지금 보고 있는 구간 */
+.cursor {
+  stroke-width: 1.2;
+  opacity: 0.9;
+}
+.cursor-a { stroke: var(--sky); filter: drop-shadow(0 0 6px var(--sky-glow)); }
+.cursor-b { stroke: var(--brass); filter: drop-shadow(0 0 6px var(--brass-glow)); }
+.cursor-dot-a { fill: var(--sky); filter: drop-shadow(0 0 7px var(--sky-glow)); }
+.cursor-dot-b { fill: var(--brass); filter: drop-shadow(0 0 7px var(--brass-glow)); }
+
+.v-tag {
+  font-family: var(--ui);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  fill: var(--dim-b);
 }
 
 .tip {
@@ -579,6 +598,11 @@ main,
   margin: 0.7rem 0 0;
 }
 
+.rail-fill {
+  left: 38%;
+  right: 22%;
+}
+
 .rail-solo { margin: 0.6rem 0 0; }
 
 .rail-groove {
@@ -614,9 +638,9 @@ main,
   position: absolute;
   top: 50%;
   left: var(--p, 50%);
-  width: 26px;
-  height: 26px;
-  margin: -13px 0 0 -13px;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
   border-radius: 50%;
   background: linear-gradient(165deg, var(--sky), var(--sky-b));
   box-shadow: var(--raise), 0 0 12px var(--sky-glow);
