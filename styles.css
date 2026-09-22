@@ -38,17 +38,25 @@
   --page-c: #262a30;
   --surface: #25282d;
   --well: #1e2025;
-  --face-a: #2d3037;
-  --face-b: #1d1f23;
+  --amb-a: rgba(255, 255, 255, 0.075);
+  --amb-b: rgba(255, 255, 255, 0.012);
+  --amb-c: rgba(0, 0, 0, 0.4);
+  --face-a: rgba(0, 0, 0, 0.26);
+  --face-b: rgba(0, 0, 0, 0.5);
 
   --hi: rgba(255, 255, 255, 0.055);
   --hi-strong: rgba(255, 255, 255, 0.10);
   --lo: rgba(0, 0, 0, 0.55);
   --lo-strong: rgba(0, 0, 0, 0.7);
 
-  --ridge: #3d424a;
-  --ridge-lit: rgba(255, 255, 255, 0.34);
-  --ridge-shade: rgba(0, 0, 0, 0.62);
+  --ridge-lit: rgba(255, 255, 255, 0.4);
+  --ridge-shade: rgba(0, 0, 0, 0.55);
+  --r1: #6f9dbb;
+  --r2: #99a4b1;
+  --r3: #c49c5f;
+  --groove: #15171a;
+  --sky-glow: rgba(123, 185, 222, 0.55);
+  --brass-glow: rgba(211, 168, 105, 0.5);
 
   --text-a: #eef0f3;
   --text-b: #c5cad1;
@@ -65,50 +73,56 @@
   --wash-1: rgba(120, 165, 205, 0.055);
   --wash-2: rgba(200, 165, 105, 0.03);
 
-  --col-a: #545b65;
-  --col-b: #212429;
-  --col-acc: #5f96ba;
+  --col-a: #7bb9de;
+  --col-acc: #d3a869;
   --spark-line: #575e68;
 }
 
-/* 라이트 — 밝은 회색 바탕 */
+/* 라이트 — 푸른 기운이 도는 밝은 흰색 바탕 */
 :root[data-theme="light"] {
-  --page-a: #e7e9ec;
-  --page-b: #eceef1;
-  --page-c: #e2e5e9;
-  --surface: #eceef1;
-  --well: #e3e6ea;
-  --face-a: #e2e5ea;
-  --face-b: #d7dae0;
+  --page-a: #eef7fd;
+  --page-b: #f5fcff;
+  --page-c: #e6f1f9;
+  --surface: #f3fbff;
+  --well: #e8f2fa;
+  --amb-a: rgba(255, 255, 255, 1);
+  --amb-b: rgba(255, 255, 255, 0.28);
+  --amb-c: rgba(118, 150, 176, 0.22);
+  --face-a: rgba(118, 150, 176, 0.1);
+  --face-b: rgba(118, 150, 176, 0.3);
 
-  --hi: rgba(255, 255, 255, 0.95);
+  --hi: rgba(255, 255, 255, 0.98);
   --hi-strong: #ffffff;
-  --lo: rgba(154, 161, 173, 0.5);
-  --lo-strong: rgba(139, 147, 160, 0.62);
+  --lo: rgba(125, 152, 175, 0.42);
+  --lo-strong: rgba(96, 127, 152, 0.62);
 
-  --ridge: #c3c8d0;
-  --ridge-lit: rgba(255, 255, 255, 0.95);
-  --ridge-shade: rgba(150, 157, 169, 0.55);
+  --ridge-lit: rgba(255, 255, 255, 1);
+  --ridge-shade: rgba(118, 146, 170, 0.45);
+  --r1: #6f9cbb;
+  --r2: #a8b8c5;
+  --r3: #ad8a4e;
+  --groove: #cbdeec;
+  --sky-glow: rgba(74, 140, 181, 0.35);
+  --brass-glow: rgba(154, 117, 48, 0.3);
 
-  --text-a: #33363b;
-  --text-b: #474b52;
-  --body-a: #545961;
-  --body-b: #6d727a;
-  --dim-a: #8d939c;
-  --dim-b: #a9aeb6;
+  --text-a: #2e3940;
+  --text-b: #44525c;
+  --body-a: #53616c;
+  --body-b: #6c7a86;
+  --dim-a: #8ba0ad;
+  --dim-b: #a9bccb;
 
-  --sky: #558fb6;
-  --brass: #9d7830;
-  --sky-soft: rgba(85, 143, 182, 0.2);
-  --brass-soft: rgba(157, 120, 48, 0.18);
+  --sky: #4a8cb5;
+  --brass: #9a7530;
+  --sky-soft: rgba(74, 140, 181, 0.18);
+  --brass-soft: rgba(154, 117, 48, 0.16);
 
-  --wash-1: rgba(110, 155, 195, 0.07);
-  --wash-2: rgba(180, 145, 85, 0.04);
+  --wash-1: rgba(110, 165, 205, 0.1);
+  --wash-2: rgba(180, 145, 85, 0.045);
 
-  --col-a: #f4f6f8;
-  --col-b: #c2c8d1;
-  --col-acc: #8bb2cc;
-  --spark-line: #aeb5bf;
+  --col-a: #6ba3c8;
+  --col-acc: #a8813a;
+  --spark-line: #9fb3c1;
 }
 
 :root {
@@ -401,16 +415,6 @@ main,
   letter-spacing: 0.04em;
 }
 
-/* 한 단 낮은 면 — 그래프가 놓이는 자리 */
-.well {
-  background: var(--well);
-  border-radius: var(--radius);
-  box-shadow: var(--inset);
-  overflow: hidden;
-}
-
-.well-flat { padding: 1.5rem 1.2rem 0.8rem; }
-
 .chart svg {
   display: block;
   width: 100%;
@@ -419,14 +423,19 @@ main,
 
 .g-face { stop-color: var(--face-a); }
 .g-face-b { stop-color: var(--face-b); }
+.g-face-c { stop-color: transparent; }
+.g-amb-a { stop-color: var(--amb-a); }
+.g-amb-b { stop-color: var(--amb-b); }
+.g-amb-c { stop-color: var(--amb-c); }
+.g-amb-d { stop-color: transparent; }
 .g-col-a { stop-color: var(--col-a); }
-.g-col-b { stop-color: var(--col-b); }
 .g-acc-a { stop-color: var(--col-acc); }
-.g-acc-b { stop-color: var(--col-b); }
+.g-r1 { stop-color: var(--r1); }
+.g-r2 { stop-color: var(--r2); }
+.g-r3 { stop-color: var(--r3); }
 
-/* 능선 — 윗면은 빛을 받고 아랫면은 그늘진다 */
+/* 능선 — 윗면은 빛을 받고, 그늘과 간접광은 아래로 넓게 퍼진다 */
 .ridge {
-  stroke: var(--ridge);
   stroke-width: 2.4;
   stroke-linecap: round;
 }
@@ -435,29 +444,31 @@ main,
   stroke: var(--ridge-lit);
   stroke-width: 1.8;
   stroke-linecap: round;
-  transform: translateY(-1.7px);
+  transform: translateY(-1.8px);
 }
 
-.ridge-shade {
+.ridge-cast {
   stroke: var(--ridge-shade);
-  stroke-width: 3.4;
+  stroke-width: 9;
   stroke-linecap: round;
-  transform: translateY(3px);
-  filter: blur(2.5px);
+  transform: translateY(12px);
+  filter: blur(10px);
+}
+
+.ridge-glow {
+  stroke-width: 10;
+  stroke-linecap: round;
+  opacity: 0.35;
+  transform: translateY(8px);
+  filter: blur(9px);
+}
+
+.tip {
+  fill: var(--brass);
+  filter: drop-shadow(0 0 7px var(--brass-glow));
 }
 
 .c-area .face { filter: url(#chroma); }
-
-/* 지금 보고 있는 구간만 색을 가진다 */
-.cursor {
-  stroke-width: 1.2;
-  opacity: 0.85;
-}
-.cursor-a { stroke: var(--sky); filter: drop-shadow(0 0 5px var(--sky-soft)); }
-.cursor-b { stroke: var(--brass); filter: drop-shadow(0 0 5px var(--brass-soft)); }
-
-.cursor-dot-a { fill: var(--sky); filter: drop-shadow(0 0 6px var(--sky-soft)); }
-.cursor-dot-b { fill: var(--brass); filter: drop-shadow(0 0 6px var(--brass-soft)); }
 
 .c-area text,
 .c-cols text {
@@ -471,6 +482,12 @@ main,
   fill: var(--dim-b);
 }
 
+.v-base {
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  fill: var(--dim-a);
+}
+
 .v-peak {
   font-size: 21px;
   font-weight: 500;
@@ -481,7 +498,7 @@ main,
 /* 기둥 — 위가 밝고 아래로 어두워지는 원통 */
 .c-cols rect {
   fill: url(#colFace);
-  filter: drop-shadow(0 6px 9px var(--lo));
+  filter: drop-shadow(0 10px 14px var(--lo));
   transform-box: fill-box;
   transform-origin: bottom;
   transform: scaleY(0.02);
@@ -544,26 +561,12 @@ main,
   height: 26px;
   margin: -13px 0 0 -13px;
   border-radius: 50%;
-  background: linear-gradient(165deg, var(--surface), var(--well));
-  box-shadow: var(--raise);
+  background: linear-gradient(165deg, var(--sky), var(--sky));
+  box-shadow: var(--raise), 0 0 10px var(--sky-glow);
   cursor: grab;
   touch-action: none;
   transition: box-shadow 0.3s var(--ease);
 }
-
-.knob::after {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  border-radius: 50%;
-  background: var(--dim-b);
-  opacity: 0.55;
-  transition: background 0.3s var(--ease), opacity 0.3s var(--ease);
-}
-
-.knob[data-knob="a"]::after { background: var(--sky); opacity: 0.9; }
-.knob[data-knob="b"]::after { background: var(--brass); opacity: 0.9; }
-.knob[data-knob="solo"]::after { background: var(--sky); opacity: 0.9; }
 
 .knob:active,
 .knob.is-held {
@@ -597,15 +600,25 @@ main,
 }
 
 .gauge .track,
-.gauge .track-lit {
+.gauge .track-lit,
+.gauge .track-shade {
   fill: none;
-  stroke-width: 6;
   stroke-linecap: round;
 }
-.gauge .track { stroke: var(--well); }
 .gauge .track-lit {
   stroke: var(--hi-strong);
-  transform: translateY(1.6px);
+  stroke-width: 9;
+  transform: translateY(2.4px);
+}
+.gauge .track-shade {
+  stroke: var(--lo-strong);
+  stroke-width: 9;
+  transform: translateY(-2.2px);
+  filter: blur(1px);
+}
+.gauge .track {
+  stroke: var(--groove);
+  stroke-width: 7;
 }
 
 .gauge .value {
@@ -615,11 +628,14 @@ main,
   stroke-linecap: round;
   stroke-dasharray: 340;
   stroke-dashoffset: 340;
-  filter: url(#chroma) drop-shadow(0 3px 5px var(--lo));
+  filter: drop-shadow(0 0 5px var(--sky-glow)) drop-shadow(0 0 12px var(--sky-glow));
   transition: stroke-dashoffset 1.6s var(--ease) 0.2s;
 }
 .is-in .gauge .value { stroke-dashoffset: 0; }
-.gauge.is-accent .value { stroke: var(--brass); }
+.gauge.is-accent .value {
+  stroke: var(--brass);
+  filter: drop-shadow(0 0 5px var(--brass-glow)) drop-shadow(0 0 12px var(--brass-glow));
+}
 
 .g-num {
   font-family: var(--ui);
@@ -711,16 +727,9 @@ main,
   color: var(--body-a);
 }
 
-/* 표 — 한 단 올라온 면, 머리글 아래에만 새긴 단차 */
-.sheet-wrap {
-  margin-top: var(--gap-3);
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--raise-lg);
-  padding: clamp(1.2rem, 3vw, 2.2rem);
-}
-
+/* 표 — 괘선 없이, 머리글 아래에만 새긴 단차 */
 .sheet {
+  margin-top: var(--gap-3);
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;

@@ -23,17 +23,30 @@
         <rect x="0" y="0" width="1" height="1" fill="url(#fadeX)" />
       </mask>
 
+      <linearGradient id="ambient" x1="0" y1="0" x2="0" y2="1">
+        <stop class="g-amb-d" offset="0%" />
+        <stop class="g-amb-a" offset="9%" />
+        <stop class="g-amb-b" offset="46%" />
+        <stop class="g-amb-c" offset="88%" />
+        <stop class="g-amb-d" offset="100%" />
+      </linearGradient>
       <linearGradient id="plateau" x1="0" y1="0" x2="0" y2="1">
         <stop class="g-face" offset="0%" />
-        <stop class="g-face-b" offset="100%" />
+        <stop class="g-face-b" offset="76%" />
+        <stop class="g-face-c" offset="100%" />
+      </linearGradient>
+      <linearGradient id="ridgeLine" x1="0" y1="0" x2="1" y2="0">
+        <stop class="g-r1" offset="0%" />
+        <stop class="g-r2" offset="52%" />
+        <stop class="g-r3" offset="100%" />
       </linearGradient>
       <linearGradient id="colFace" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-col-a" offset="0%" />
-        <stop class="g-col-b" offset="100%" />
+        <stop class="g-col-a" offset="0%" stop-opacity="0.9" />
+        <stop class="g-col-a" offset="100%" stop-opacity="0.05" />
       </linearGradient>
       <linearGradient id="colFaceAccent" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-acc-a" offset="0%" />
-        <stop class="g-acc-b" offset="100%" />
+        <stop class="g-acc-a" offset="0%" stop-opacity="0.95" />
+        <stop class="g-acc-a" offset="100%" stop-opacity="0.06" />
       </linearGradient>
 
       <!-- 색수차 — 데이터의 가장자리에만, 눈에 띄지 않게 -->
@@ -90,7 +103,7 @@
         </article>
         <article class="note reveal">
           <h3>필요한 곳에만</h3>
-          <p>단차는 만질 수 있는 것과 담는 것에만 씁니다. 읽기만 하는 문장에는 아무 장치도 두지 않습니다.</p>
+          <p>단차는 만질 수 있는 것과 표의 머리글에만 씁니다. 그래프와 읽기만 하는 문장에는 테를 두르지 않습니다.</p>
         </article>
       </div>
     </section>
@@ -106,35 +119,22 @@
       <figure class="chart reveal">
         <figcaption>
           <span class="c-title">월별 밀도</span>
-          <span class="c-read" id="rangeRead">6월 – 10월 · 평균 <b>64.8</b></span>
+          <span class="c-note">2026 · 12개월 · 지표 0 – 100</span>
         </figcaption>
-
-        <div class="well">
-          <svg class="c-area" viewBox="30 0 820 300" role="img" aria-label="월별 밀도 추이, 34에서 95까지 상승">
-            <path class="face" fill="url(#plateau)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0 L 850.0 300 L 30.0 300 Z" />
-            <path class="ridge-shade" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
-            <path class="ridge-lit" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
-            <path class="ridge" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
-
-            <line class="cursor cursor-a" x1="341.6" y1="0" x2="341.6" y2="300" />
-            <line class="cursor cursor-b" x1="669.6" y1="0" x2="669.6" y2="300" />
-            <circle class="cursor-dot cursor-dot-a" cx="341.6" cy="139.0" r="3.4" />
-            <circle class="cursor-dot cursor-dot-b" cx="669.6" cy="97.0" r="3.4" />
-
-            <text class="v-axis" x="46" y="284">1월</text>
-            <text class="v-axis" x="440" y="284" text-anchor="middle">6월</text>
-            <text class="v-axis" x="834" y="284" text-anchor="end">12월</text>
-          </svg>
-        </div>
-
-        <div class="rail" id="rangeRail">
-          <span class="rail-groove" aria-hidden="true"></span>
-          <span class="rail-fill" aria-hidden="true"></span>
-          <button type="button" class="knob" data-knob="a" style="--p: 38%"
-            role="slider" aria-label="구간 시작" aria-valuemin="1" aria-valuemax="12" aria-valuenow="5"></button>
-          <button type="button" class="knob" data-knob="b" style="--p: 78%"
-            role="slider" aria-label="구간 끝" aria-valuemin="1" aria-valuemax="12" aria-valuenow="10"></button>
-        </div>
+        <svg class="c-area" viewBox="0 0 880 300" role="img" aria-label="월별 밀도 추이, 34에서 95까지 상승">
+          <rect class="ambient" mask="url(#fadeEdges)" x="0" y="0" width="880" height="300" fill="url(#ambient)" />
+          <path class="face" mask="url(#fadeEdges)" fill="url(#plateau)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0 L 850.0 300 L 30.0 300 Z" />
+          <path class="ridge-cast" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+          <path class="ridge-glow" fill="none" stroke="url(#ridgeLine)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+          <path class="ridge-lit" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+          <path class="ridge" fill="none" stroke="url(#ridgeLine)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+          <circle class="tip" cx="850" cy="51" r="4" />
+          <text class="v-peak" x="850" y="30" text-anchor="end">95</text>
+          <text class="v-base" x="30" y="212">34</text>
+          <text class="v-axis" x="30" y="288">1월</text>
+          <text class="v-axis" x="440" y="288" text-anchor="middle">6월</text>
+          <text class="v-axis" x="850" y="288" text-anchor="end">12월</text>
+        </svg>
       </figure>
 
       <div class="duo">
@@ -143,7 +143,6 @@
             <span class="c-title">구간 분포</span>
             <span class="c-note">9개 구간 · 상대값</span>
           </figcaption>
-          <div class="well well-flat">
             <svg class="c-cols" viewBox="0 0 880 230" role="img" aria-label="9개 구간의 상대 분포, 8번째 구간이 가장 높음">
               <g>
                 <rect x="30.0" y="124.4" width="46" height="75.6" rx="23" />
@@ -158,13 +157,13 @@
               </g>
               <text class="v-peak" x="730.2" y="20" text-anchor="middle">94</text>
             </svg>
-          </div>
         </figure>
 
         <div class="gauges reveal">
           <figure class="gauge">
             <svg viewBox="0 0 140 140" role="img" aria-label="정합도 68퍼센트">
               <path class="track-lit" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
+              <path class="track-shade" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="track" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="value" d="M 31.82 108.18 A 54 54 0 1 1 110.51 34.29" />
               <text class="g-num" x="70" y="76" text-anchor="middle">68</text>
@@ -174,6 +173,7 @@
           <figure class="gauge">
             <svg viewBox="0 0 140 140" role="img" aria-label="분산도 41퍼센트">
               <path class="track-lit" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
+              <path class="track-shade" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="track" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="value" d="M 31.82 108.18 A 54 54 0 0 1 47.78 20.78" />
               <text class="g-num" x="70" y="76" text-anchor="middle">41</text>
@@ -183,6 +183,7 @@
           <figure class="gauge is-accent">
             <svg viewBox="0 0 140 140" role="img" aria-label="가독성 86퍼센트">
               <path class="track-lit" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
+              <path class="track-shade" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="track" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="value" d="M 31.82 108.18 A 54 54 0 1 1 123.57 76.77" />
               <text class="g-num" x="70" y="76" text-anchor="middle">86</text>
@@ -249,8 +250,7 @@
         괘선은 없습니다. 머리글과 본문 사이에만 한 줄의 단차를 새기고,
         추세는 행마다 같은 언어의 작은 능선으로 놓습니다.
       </p>
-      <div class="sheet-wrap reveal">
-        <table class="sheet">
+      <table class="sheet reveal">
           <caption class="a11y">요소별 비중과 변화, 8구간 추세 (예시 데이터)</caption>
           <thead>
             <tr>
@@ -322,8 +322,7 @@
               </td>
             </tr>
           </tbody>
-        </table>
-      </div>
+      </table>
     </section>
 
     <section class="band">
