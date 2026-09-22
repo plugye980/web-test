@@ -84,7 +84,20 @@
     });
   });
 
-  /* ── 슬라이더 ──────────────────────────────────────────── */
+  /* ── 슬라이더와 구간 손잡이 ───────────────────────────── */
+  var VALUES = [34, 41, 38, 49, 58, 54, 63, 72, 69, 80, 86, 95];
+  var MONTHS = VALUES.length;
+  var PLOT_X0 = 30;
+  var PLOT_W = 820;
+  var PLOT_TOP = 51;
+  var PLOT_UNIT = 2.2;
+
+  function valueAt(p) {
+    var t = p * (MONTHS - 1);
+    var i = Math.min(Math.floor(t), MONTHS - 2);
+    return VALUES[i] + (VALUES[i + 1] - VALUES[i]) * (t - i);
+  }
+
   function setupRail(rail, onChange) {
     if (!rail) return;
     var knobs = Array.prototype.slice.call(rail.querySelectorAll(".knob"));
@@ -97,12 +110,25 @@
       knobs.forEach(function (k, i) {
         k.style.setProperty("--p", (pos[i] * 100).toFixed(2) + "%");
       });
-      if (fill) fill.style.right = ((1 - pos[0]) * 100).toFixed(2) + "%";
-      onChange(pos, knobs);
+      if (fill) {
+        if (knobs.length > 1) {
+          fill.style.left = (pos[0] * 100).toFixed(2) + "%";
+          fill.style.right = ((1 - pos[1]) * 100).toFixed(2) + "%";
+        } else {
+          fill.style.right = ((1 - pos[0]) * 100).toFixed(2) + "%";
+        }
+      }
+      onChange(pos, knobs, rail);
     }
 
     function move(i, p) {
-      pos[i] = Math.min(1, Math.max(0, p));
+      p = Math.min(1, Math.max(0, p));
+      if (knobs.length > 1) {
+        if (i === 0) p = Math.min(p, pos[1] - 0.06);
+        else p = Math.max(p, pos[0] + 0.06);
+        p = Math.min(1, Math.max(0, p));
+      }
+      pos[i] = p;
       paint();
     }
 
@@ -122,7 +148,7 @@
         });
       });
       knob.addEventListener("keydown", function (e) {
-        var step = e.shiftKey ? 0.1 : 0.01;
+        var step = e.shiftKey ? 0.1 : knobs.length > 1 ? 1 / (MONTHS - 1) : 0.01;
         if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
           move(i, pos[i] - step);
           e.preventDefault();
@@ -135,6 +161,39 @@
 
     paint();
   }
+
+  var area = document.querySelector(".c-area");
+  setupRail(document.getElementById("rangeRail"), function (pos, knobs, rail) {
+    if (!area) return;
+    var box = rail.getBoundingClientRect();
+    var inset = box.width ? 11 / box.width : 0;
+    ["a", "b"].forEach(function (key, i) {
+      var x = PLOT_X0 + PLOT_W * (inset + pos[i] * (1 - 2 * inset));
+      var v = valueAt(pos[i]);
+      var line = area.querySelector(".cursor-" + key);
+      var dot = area.querySelector(".cursor-dot-" + key);
+      if (line) {
+        line.setAttribute("x1", x.toFixed(1));
+        line.setAttribute("x2", x.toFixed(1));
+      }
+      if (dot) {
+        dot.setAttribute("cx", x.toFixed(1));
+        dot.setAttribute("cy", (PLOT_TOP + (95 - v) * PLOT_UNIT).toFixed(1));
+      }
+      var month = Math.round(pos[i] * (MONTHS - 1)) + 1;
+      knobs[i].setAttribute("aria-valuenow", String(month));
+      knobs[i].setAttribute("aria-valuetext", month + "월");
+    });
+    var read = document.getElementById("rangeRead");
+    if (read) {
+      var m1 = Math.round(pos[0] * (MONTHS - 1)) + 1;
+      var m2 = Math.round(pos[1] * (MONTHS - 1)) + 1;
+      var sum = 0;
+      for (var m = m1; m <= m2; m++) sum += VALUES[m - 1];
+      read.innerHTML =
+        m1 + "월 – " + m2 + "월 · 평균 <b>" + (sum / (m2 - m1 + 1)).toFixed(1) + "</b>";
+    }
+  });
 
   var soloRead = document.getElementById("soloRead");
   setupRail(document.getElementById("soloRail"), function (pos, knobs) {
