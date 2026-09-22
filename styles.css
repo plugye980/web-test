@@ -29,6 +29,9 @@
 
   --ease: cubic-bezier(0.22, 0.68, 0.24, 1);
   --radius: 22px;
+
+  /* 본문 열 바깥의 여백 — 장식은 여기까지만 */
+  --gut: calc((100vw - min(1120px, 88vw)) / 2 - 24px);
 }
 
 /* 다크 — 짙은 회색 바탕 */
@@ -301,7 +304,7 @@ body::before {
 }
 .sheet tbody tr:first-child { background-image: none; }
 
-/* 계단 지형 — 화면 너머로 이어지는 큰 단의 일부만 보인다 */
+/* 계단 지형 — 여백에만. 화면 밖에서 들어와 다시 화면 밖으로 나간다 */
 .decor {
   display: none;
   position: absolute;
@@ -315,8 +318,12 @@ body::before {
 
 .dec {
   position: absolute;
-  width: var(--w, 40vw);
+  width: calc(var(--off, 560px) + var(--gut));
 }
+
+.dec-left { left: calc(-1 * var(--off, 560px)); }
+.dec-right { right: calc(-1 * var(--off, 560px)); }
+.dec-right svg { transform: scaleX(-1); }
 
 .dec svg {
   display: block;
@@ -325,16 +332,8 @@ body::before {
   overflow: visible;
 }
 
-.dec-left { left: 0; }
-.dec-right { right: 0; }
-.dec-right svg,
-.dec-flip svg { transform: scaleX(-1); }
-.dec-right.dec-flip svg { transform: none; }
-
-.dec-o { width: min(var(--w, 150px), calc((100vw - min(1120px, 88vw)) / 2 - 26px)); }
-
 .dec-face { stroke: none; filter: drop-shadow(3px 7px 9px var(--lo)); }
-.dec-o .dec-face { filter: drop-shadow(4px 9px 12px var(--lo)); }
+.dec-o .dec-face { filter: drop-shadow(4px 10px 13px var(--lo)); }
 .dec-face.t1 { fill: var(--tier-1); }
 .dec-face.t2 { fill: var(--tier-2); }
 .dec-face.t3 { fill: var(--tier-3); }
@@ -347,7 +346,7 @@ body::before {
   opacity: 0.7;
 }
 
-@media (min-width: 1180px) {
+@media (min-width: 1280px) {
   .decor { display: block; }
 }
 
