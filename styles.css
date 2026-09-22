@@ -176,6 +176,7 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   font-family: var(--ui);
   font-size: var(--step-4);
@@ -300,6 +301,62 @@ body::before {
 }
 .sheet tbody tr:first-child { background-image: none; }
 
+/* 좌우 여백의 계단 지형 — 넓은 화면에서만 */
+.decor {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dec {
+  position: absolute;
+  width: calc((100vw - min(1120px, 88vw)) / 2 - 38px);
+}
+
+.dec svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dec-left {
+  left: 0;
+  top: 104vh;
+  height: 168vh;
+}
+
+.dec-right {
+  right: 0;
+  top: 286vh;
+  height: 128vh;
+}
+
+.dec-low {
+  left: 0;
+  top: 452vh;
+  height: 52vh;
+}
+
+.dec-face { stroke: none; }
+.dec-face.t1 { fill: var(--tier-1); }
+.dec-face.t2 { fill: var(--tier-2); }
+.dec-face.t3 { fill: var(--tier-3); }
+.dec-face.t4 { fill: var(--well-2); }
+
+.dec-edge {
+  fill: none;
+  stroke: var(--tier-edge);
+  stroke-width: 1.4;
+  opacity: 0.75;
+}
+
+@media (min-width: 1380px) {
+  .decor { display: block; }
+}
+
 /* 계단 — 장식도 실제로 한 단 올라오거나 내려간다 */
 .stair {
   position: relative;
@@ -309,16 +366,15 @@ body::before {
 
 .stair i {
   position: absolute;
-  height: 9px;
-  border-radius: 5px;
-  background: var(--surface);
-  box-shadow: var(--raise);
+  height: 10px;
+  border-radius: 3px;
+  background-color: var(--tier-1);
+  background-image: linear-gradient(180deg, var(--tier-edge) 0 1.4px, rgba(0, 0, 0, 0) 1.4px);
+  box-shadow: 0 3px 6px var(--lo);
 }
 
-.stair i:nth-child(2) {
-  background: var(--well-2);
-  box-shadow: var(--inset-sm);
-}
+.stair i:nth-child(2) { background-color: var(--tier-2); }
+.stair i:nth-child(3) { background-color: var(--tier-3); }
 
 .stair i:nth-child(1) { left: 0; width: 30%; top: 0; }
 .stair i:nth-child(2) { left: 30%; width: 26%; top: 8px; }
