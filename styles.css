@@ -29,9 +29,6 @@
 
   --ease: cubic-bezier(0.22, 0.68, 0.24, 1);
   --radius: 22px;
-
-  /* 본문 열 바깥의 여백 — 장식은 여기까지만 */
-  --gut: calc((100vw - min(1120px, 88vw)) / 2 - 24px);
 }
 
 /* 다크 — 짙은 회색 바탕 */
@@ -304,52 +301,6 @@ body::before {
 }
 .sheet tbody tr:first-child { background-image: none; }
 
-/* 계단 지형 — 여백에만. 화면 밖에서 들어와 다시 화면 밖으로 나간다 */
-.decor {
-  display: none;
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.decor-under { z-index: 0; }
-.decor-over { z-index: 2; }
-
-.dec {
-  position: absolute;
-  width: calc(var(--off, 560px) + var(--gut));
-}
-
-.dec-left { left: calc(-1 * var(--off, 560px)); }
-.dec-right { right: calc(-1 * var(--off, 560px)); }
-.dec-right svg { transform: scaleX(-1); }
-
-.dec svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-.dec-face { stroke: none; filter: drop-shadow(3px 7px 9px var(--lo)); }
-.dec-o .dec-face { filter: drop-shadow(4px 10px 13px var(--lo)); }
-.dec-face.t1 { fill: var(--tier-1); }
-.dec-face.t2 { fill: var(--tier-2); }
-.dec-face.t3 { fill: var(--tier-3); }
-.dec-face.t4 { fill: var(--well-2); }
-
-.dec-edge {
-  fill: none;
-  stroke: var(--tier-edge);
-  stroke-width: 1.3;
-  opacity: 0.7;
-}
-
-@media (min-width: 1280px) {
-  .decor { display: block; }
-}
-
 /* 계단 — 장식도 실제로 한 단 올라오거나 내려간다 */
 .stair {
   position: relative;
@@ -380,6 +331,7 @@ body::before {
 .stair-foot {
   position: relative;
   z-index: 1;
+  isolation: isolate;
   width: min(1120px, 88vw);
   margin-inline: auto;
   margin-bottom: 0;
@@ -568,6 +520,33 @@ main,
 .well-flat {
   background: var(--well-2);
   padding: 1.6rem 1.2rem 1rem;
+}
+
+/* 구간 분포의 경계 — 그래프와 같은 물결 단 */
+.plate-face.t2 { fill: var(--tier-2); }
+.plate-face.t3 { fill: var(--tier-3); }
+
+.plate-lit {
+  fill: none;
+  stroke: var(--ridge-lit);
+  stroke-width: 1.4;
+  opacity: 0.5;
+  transform: translateY(-1.3px);
+}
+
+.plate-shade {
+  fill: none;
+  stroke: var(--ridge-shade);
+  stroke-width: 7;
+  opacity: 0.55;
+  transform: translate(2px, 6px);
+  filter: blur(4.5px);
+}
+
+.plate-edge {
+  fill: none;
+  stroke: var(--tier-edge);
+  stroke-width: 1.4;
 }
 
 .chart figcaption {
@@ -964,6 +943,83 @@ main,
 
 .switch-text {
   font-size: var(--step-4);
+}
+
+/* 한 단 올라선 평원 — 앞단은 그래프와 같은 물결 */
+.raised {
+  position: relative;
+}
+
+.plain {
+  position: absolute;
+  top: -5.5rem;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.plain-edge {
+  display: block;
+  width: 100%;
+  height: 5.5rem;
+  overflow: visible;
+}
+
+.plain-face { fill: var(--tier-1); }
+
+.plain-lit {
+  fill: none;
+  stroke: var(--ridge-lit);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.55;
+  transform: translateY(-1.3px);
+}
+
+.plain-shade {
+  fill: none;
+  stroke: var(--ridge-shade);
+  stroke-width: 7;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.5;
+  transform: translate(2px, 6px);
+  filter: blur(4.5px);
+}
+
+.plain-body {
+  display: block;
+  height: calc(100% - 5.5rem + 1px);
+  background: var(--tier-1);
+}
+
+.foot { position: relative; }
+
+/* 평원은 계단과 푸터까지 이어진다 */
+.stair-foot::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: var(--tier-1);
+  z-index: -1;
+}
+
+.foot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: var(--tier-1);
+  z-index: -1;
 }
 
 /* 표 — 괘선 없이, 머리글 아래에만 새긴 단차 */
