@@ -46,10 +46,11 @@
   --tag: rgba(255, 255, 255, 0.08);
   --col-lit: rgba(255, 255, 255, 0.5);
   --inset-lo: rgba(0, 0, 0, 0.34);
+  --edge-lo: rgba(0, 0, 0, 0.45);
   --well-2: #202327;
-  --tier-1: #2f353c;
-  --tier-2: #272c33;
-  --tier-3: #1f2329;
+  --tier-1: #31373f;
+  --tier-2: #272d34;
+  --tier-3: #1e2228;
   --sky-text: #8cc7e8;
   --sky-text-b: #6ba8cc;
   --brass-text: #e0b878;
@@ -126,10 +127,11 @@
   --d3: #7d6232;
   --groove: #eaf0f6;
   --inset-lo: rgba(116, 152, 192, 0.32);
+  --edge-lo: rgba(112, 150, 192, 0.42);
   --well-2: #f2f6fb;
-  --tier-1: #f7fbff;
-  --tier-2: #f0f6fd;
-  --tier-3: #e9f2fb;
+  --tier-1: #f8fcff;
+  --tier-2: #eff6fd;
+  --tier-3: #e5f0fa;
   --sky-glow: rgba(63, 163, 214, 0.52);
   --brass-glow: rgba(192, 143, 57, 0.46);
 
@@ -162,8 +164,8 @@
   --press: inset 0 3px 6px var(--lo-strong), inset 0 -1px 2px var(--hi);
   --lit-text: drop-shadow(0 -1px 0 var(--hi)) drop-shadow(0 3px 6px var(--lo));
   --lit-text-sm: drop-shadow(0 -1px 0 var(--hi)) drop-shadow(0 2px 4px var(--lo));
-  --edge: linear-gradient(90deg, transparent 0%, var(--lo) 10%, var(--lo) 90%, transparent 100%),
-    linear-gradient(90deg, transparent 0%, var(--hi) 10%, var(--hi) 90%, transparent 100%);
+  --edge: linear-gradient(90deg, transparent 0%, var(--edge-lo) 8%, var(--edge-lo) 92%, transparent 100%),
+    linear-gradient(90deg, transparent 0%, var(--hi) 8%, var(--hi) 92%, transparent 100%);
 }
 
 html {
@@ -281,7 +283,7 @@ body::before {
 /* 항목 사이의 얕은 단차 — 상자가 아니라 한 줄의 결 */
 .note,
 .ctl {
-  padding-top: 1.5rem;
+  padding-top: 1.6rem;
   background-image: var(--edge);
   background-size: 100% 1px, 100% 1px;
   background-position: 0 0, 0 1px;
@@ -295,6 +297,40 @@ body::before {
   background-repeat: no-repeat;
 }
 .sheet tbody tr:first-child { background-image: none; }
+
+/* 계단 — 장식이자 구분. 어떤 단은 고르고 어떤 단은 어긋난다 */
+.stair {
+  position: relative;
+  height: 15px;
+  margin-bottom: 2.2rem;
+}
+
+.stair i {
+  position: absolute;
+  height: 2px;
+  background-image: var(--edge);
+  background-size: 100% 1px, 100% 1px;
+  background-position: 0 0, 0 1px;
+  background-repeat: no-repeat;
+}
+
+.stair i:nth-child(1) { left: 0; width: 27%; top: 0; }
+.stair i:nth-child(2) { left: 27%; width: 21%; top: 6px; }
+.stair i:nth-child(3) { left: 48%; width: 52%; top: 12px; }
+
+.stair-even i:nth-child(1) { left: 0; width: 33.33%; top: 0; }
+.stair-even i:nth-child(2) { left: 33.33%; width: 33.33%; top: 6px; }
+.stair-even i:nth-child(3) { left: 66.66%; width: 33.34%; top: 12px; }
+
+.stair-foot {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 88vw);
+  margin-inline: auto;
+  margin-bottom: 0;
+}
+
+.band > .stair { grid-column: 1 / -1; }
 
 /* 레이아웃 */
 .top,
@@ -563,17 +599,17 @@ main,
 
 .step-lit {
   stroke: var(--ridge-lit);
-  stroke-width: 1;
+  stroke-width: 1.1;
   stroke-linecap: round;
-  opacity: 0.28;
-  transform: translateY(-1px);
+  opacity: 0.42;
+  transform: translateY(-1.1px);
 }
 
 .step-shade {
   stroke: var(--ridge-shade);
   stroke-width: 6;
   stroke-linecap: round;
-  opacity: 0.5;
+  opacity: 0.62;
   transform: translate(1.5px, 4px);
   filter: blur(4px);
 }
