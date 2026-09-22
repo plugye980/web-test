@@ -2,10 +2,10 @@
   "use strict";
 
   var root = document.documentElement;
-  var THEMES = ["ink", "brass", "sky"];
+  var THEMES = ["dark", "light"];
   var STORE_KEY = "preview-theme";
 
-  /* 테마 전환 */
+  /* 테마 — 저장값이 없으면 시스템 설정을 따른다 */
   var picks = Array.prototype.slice.call(
     document.querySelectorAll("[data-theme-set]")
   );
@@ -14,8 +14,9 @@
     if (THEMES.indexOf(name) === -1) return;
     root.setAttribute("data-theme", name);
     picks.forEach(function (btn) {
-      btn.classList.toggle("is-on", btn.dataset.themeSet === name);
-      btn.setAttribute("aria-pressed", String(btn.dataset.themeSet === name));
+      var on = btn.dataset.themeSet === name;
+      btn.classList.toggle("is-on", on);
+      btn.setAttribute("aria-pressed", String(on));
     });
     try {
       localStorage.setItem(STORE_KEY, name);
@@ -36,7 +37,10 @@
   } catch (e) {
     saved = null;
   }
-  applyTheme(saved || "ink");
+
+  var prefersLight =
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+  applyTheme(saved || (prefersLight ? "light" : "dark"));
 
   /* 스크롤 등장 */
   var items = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
@@ -49,14 +53,13 @@
       el.classList.add("is-in");
     });
   } else {
-    var seen = new WeakMap();
+    var delays = new WeakMap();
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           var el = entry.target;
-          var delay = seen.get(el) || 0;
-          el.style.transitionDelay = delay + "ms";
+          el.style.transitionDelay = (delays.get(el) || 0) + "ms";
           el.classList.add("is-in");
           observer.unobserve(el);
         });
@@ -69,7 +72,7 @@
     items.forEach(function (el) {
       var parent = el.parentElement;
       var n = groups.get(parent) || 0;
-      seen.set(el, Math.min(n * 90, 360));
+      delays.set(el, Math.min(n * 90, 360));
       groups.set(parent, n + 1);
       observer.observe(el);
     });
@@ -84,6 +87,18 @@
     var y = 30;
     var raf = null;
 
+    var step = function () {
+      x += (targetX - x) * 0.07;
+      y += (targetY - y) * 0.07;
+      aura.style.setProperty("--mx", x.toFixed(2) + "%");
+      aura.style.setProperty("--my", y.toFixed(2) + "%");
+      if (Math.abs(targetX - x) > 0.05 || Math.abs(targetY - y) > 0.05) {
+        raf = requestAnimationFrame(step);
+      } else {
+        raf = null;
+      }
+    };
+
     window.addEventListener(
       "pointermove",
       function (e) {
@@ -94,17 +109,5 @@
       },
       { passive: true }
     );
-
-    function step() {
-      x += (targetX - x) * 0.07;
-      y += (targetY - y) * 0.07;
-      aura.style.setProperty("--mx", x.toFixed(2) + "%");
-      aura.style.setProperty("--my", y.toFixed(2) + "%");
-      if (Math.abs(targetX - x) > 0.05 || Math.abs(targetY - y) > 0.05) {
-        raf = requestAnimationFrame(step);
-      } else {
-        raf = null;
-      }
-    }
   }
 })();
