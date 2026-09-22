@@ -4,15 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>형태 없는 결 — 디자인 프리뷰</title>
-<meta name="description" content="경계선 없이 톤과 빛의 깊이로만 구조를 세우는 디자인 프리뷰." />
+<meta name="description" content="무채색 바탕 위에 단차와 그림자로만 구조를 세우고, 색은 포인트로만 쓰는 디자인 프리뷰." />
 <meta name="color-scheme" content="dark light" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="aura" aria-hidden="true"></div>
-
   <svg class="shared-defs" width="0" height="0" aria-hidden="true" focusable="false">
     <defs>
       <linearGradient id="fadeX" x1="0" y1="0" x2="1" y2="0">
@@ -25,45 +23,27 @@
         <rect x="0" y="0" width="1" height="1" fill="url(#fadeX)" />
       </mask>
 
-      <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-a" offset="0%" stop-opacity="0.38" />
-        <stop class="g-a" offset="70%" stop-opacity="0.06" />
-        <stop class="g-a" offset="100%" stop-opacity="0" />
+      <linearGradient id="plateau" x1="0" y1="0" x2="0" y2="1">
+        <stop class="g-face" offset="0%" />
+        <stop class="g-face-b" offset="100%" />
       </linearGradient>
-      <linearGradient id="areaLine" x1="0" y1="0" x2="1" y2="0">
-        <stop class="g-b" offset="0%" />
-        <stop class="g-a" offset="55%" />
-        <stop class="g-c" offset="100%" />
+      <linearGradient id="colFace" x1="0" y1="0" x2="0" y2="1">
+        <stop class="g-col-a" offset="0%" />
+        <stop class="g-col-b" offset="100%" />
       </linearGradient>
-      <linearGradient id="colFill" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-a" offset="0%" stop-opacity="0.88" />
-        <stop class="g-a" offset="100%" stop-opacity="0.04" />
-      </linearGradient>
-      <linearGradient id="colPeak" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-c" offset="0%" stop-opacity="0.95" />
-        <stop class="g-c" offset="100%" stop-opacity="0.05" />
-      </linearGradient>
-      <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-a" offset="0%" stop-opacity="0.42" />
-        <stop class="g-a" offset="100%" stop-opacity="0" />
-      </linearGradient>
-      <linearGradient id="sparkFillAccent" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-c" offset="0%" stop-opacity="0.42" />
-        <stop class="g-c" offset="100%" stop-opacity="0" />
-      </linearGradient>
-      <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1">
-        <stop class="g-a" offset="0%" stop-opacity="0.3" />
-        <stop class="g-a" offset="82%" stop-opacity="0" />
+      <linearGradient id="colFaceAccent" x1="0" y1="0" x2="0" y2="1">
+        <stop class="g-acc-a" offset="0%" />
+        <stop class="g-acc-b" offset="100%" />
       </linearGradient>
 
-      <!-- 색수차 — 글자가 아니라 데이터의 가장자리에서만 갈라진다 -->
+      <!-- 색수차 — 데이터의 가장자리에만, 눈에 띄지 않게 -->
       <filter id="chroma" x="-8%" y="-30%" width="116%" height="160%" color-interpolation-filters="sRGB">
-        <feOffset in="SourceGraphic" dx="-1.5" dy="-0.7" result="s1" />
+        <feOffset in="SourceGraphic" dx="-1.1" dy="-0.5" result="s1" />
         <feColorMatrix in="s1" type="matrix" result="c1"
-          values="0 0 0 0 0.35  0 0 0 0 0.74  0 0 0 0 0.95  0 0 0 0.5 0" />
-        <feOffset in="SourceGraphic" dx="1.5" dy="0.7" result="s2" />
+          values="0 0 0 0 0.35  0 0 0 0 0.74  0 0 0 0 0.95  0 0 0 0.34 0" />
+        <feOffset in="SourceGraphic" dx="1.1" dy="0.5" result="s2" />
         <feColorMatrix in="s2" type="matrix" result="c2"
-          values="0 0 0 0 0.84  0 0 0 0 0.64  0 0 0 0 0.28  0 0 0 0.5 0" />
+          values="0 0 0 0 0.84  0 0 0 0 0.64  0 0 0 0 0.28  0 0 0 0.34 0" />
         <feMerge>
           <feMergeNode in="c1" />
           <feMergeNode in="c2" />
@@ -75,28 +55,23 @@
 
   <header class="top">
     <p class="mark">형태 없는 결<span class="mark-sub">FORM WITHOUT EDGES</span></p>
-    <nav class="themes" aria-label="테마">
-      <button type="button" class="theme-pick is-on" data-theme-set="dark">DARK</button>
-      <button type="button" class="theme-pick" data-theme-set="light">LIGHT</button>
+    <nav class="segment" aria-label="테마">
+      <span class="segment-thumb" aria-hidden="true"></span>
+      <button type="button" class="segment-pick is-on" data-theme-set="dark">DARK</button>
+      <button type="button" class="segment-pick" data-theme-set="light">LIGHT</button>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <svg class="hero-wave" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <path mask="url(#fadeEdges)" fill="url(#waveFill)" d="M 0.0 228.0 C 44.4 215.2 88.9 192.8 133.3 189.6 C 177.8 186.4 222.2 213.6 266.7 208.8 C 311.1 204.0 355.6 166.4 400.0 160.8 C 444.4 155.2 488.9 180.0 533.3 175.2 C 577.8 170.4 622.2 136.8 666.7 132.0 C 711.1 127.2 755.6 152.8 800.0 146.4 C 844.4 140.0 888.9 99.2 933.3 93.6 C 977.8 88.0 1022.2 116.8 1066.7 112.8 C 1111.1 108.8 1155.6 84.0 1200.0 69.6 L 1200.0 300 L 0.0 300 Z" />
-        <path class="wave-line" mask="url(#fadeEdges)" fill="none" stroke="url(#areaLine)" stroke-width="1.2" d="M 0.0 228.0 C 44.4 215.2 88.9 192.8 133.3 189.6 C 177.8 186.4 222.2 213.6 266.7 208.8 C 311.1 204.0 355.6 166.4 400.0 160.8 C 444.4 155.2 488.9 180.0 533.3 175.2 C 577.8 170.4 622.2 136.8 666.7 132.0 C 711.1 127.2 755.6 152.8 800.0 146.4 C 844.4 140.0 888.9 99.2 933.3 93.6 C 977.8 88.0 1022.2 116.8 1066.7 112.8 C 1111.1 108.8 1155.6 84.0 1200.0 69.6" />
-      </svg>
-
       <p class="eyebrow reveal">디자인 프리뷰 &middot; 2026</p>
       <h1 class="display reveal">
-        <span class="line">경계를 지우면</span>
-        <span class="line">남는 것은 결이다</span>
+        <span class="line">경계를 지우고</span>
+        <span class="line">깊이를 남긴다</span>
       </h1>
       <p class="lede reveal">
-        선으로 가두지 않고 밝기의 차이로만 위계를 세웁니다.
-        하늘색을 바탕에 두고 황동색을 한 점씩 얹으며, 깊이는 테두리가 아니라
-        아래로 번지는 빛으로 만듭니다.
+        바탕은 무채색입니다. 선을 긋는 대신 면을 아주 조금 눕히거나 세워
+        서로를 갈라 놓고, 하늘색과 황동색은 눈이 멈춰야 할 한 점에만 얹습니다.
       </p>
       <p class="meta reveal">SCROLL</p>
     </section>
@@ -106,81 +81,60 @@
       <h2 class="head reveal">원칙</h2>
       <div class="flow">
         <article class="note reveal">
-          <h3>선을 긋지 않는다</h3>
-          <p>구획은 테두리가 아니라 간격이 만듭니다. 두 요소가 다른 것이라면 선을 그리는 대신 그 사이를 더 비워 둡니다.</p>
+          <h3>바탕은 무채색</h3>
+          <p>화면의 99퍼센트는 회색입니다. 색은 값이 바뀌는 지점, 지금 조작하는 요소, 읽어야 할 숫자에만 아주 옅게 들어갑니다.</p>
         </article>
         <article class="note reveal">
-          <h3>한 겹의 톤</h3>
-          <p>배경도 글자도 완전히 평평하지 않습니다. 눈에 띄지 않을 만큼의 기울기를 주어 화면이 숨을 쉬게 합니다.</p>
+          <h3>선 대신 단차</h3>
+          <p>테두리를 그리지 않습니다. 대신 면을 한 단 낮추거나 올리고, 그 경계에 빛과 그림자를 얇게 남겨 구분합니다.</p>
         </article>
         <article class="note reveal">
-          <h3>빛으로 띄운다</h3>
-          <p>입체감은 상자와 테두리가 아니라 형태 아래로 번지는 그림자에서 나옵니다. 데이터의 가장자리에만 색이 아주 조금 갈라집니다.</p>
+          <h3>필요한 곳에만</h3>
+          <p>단차는 만질 수 있는 것과 담는 것에만 씁니다. 읽기만 하는 문장에는 아무 장치도 두지 않습니다.</p>
         </article>
       </div>
     </section>
 
     <section class="band">
       <p class="index reveal">02</p>
-      <h2 class="head reveal">한 벌의 서체</h2>
-      <p class="lede reveal">
-        한글과 라틴이 같은 골격을 씁니다. 제목은 충분한 무게로, 본문은 가볍게.
-        자간을 열어 두 문자가 같은 호흡으로 읽히게 했습니다.
-      </p>
-      <div class="scale">
-        <p class="s-1 reveal">형태 없는 결</p>
-        <p class="s-1 lat reveal">FORM WITHOUT EDGES</p>
-        <p class="s-2 reveal">제목의 무게 <span class="dim">400 / 0.02em</span></p>
-        <p class="s-3 reveal">표제와 부제 사이 <span class="dim">300 / 0.04em</span></p>
-        <p class="s-4 reveal">본문 — 읽기 위한 크기, 행간은 1.85배 <span class="dim">300 / 0</span></p>
-        <p class="s-5 reveal">주석 — 존재하되 앞서지 않는 <span class="dim">300 / 0.22em</span></p>
-      </div>
-    </section>
-
-    <section class="band">
-      <p class="index reveal">03</p>
-      <h2 class="head reveal">하늘과 황동</h2>
-      <div class="flow">
-        <article class="note reveal">
-          <h3>바탕은 하늘</h3>
-          <p>라이트 모드의 배경은 순백에서 출발해 아주 옅은 파랑으로만 기웁니다. 글자도 같은 하늘색 계열에서 농도만 달리합니다.</p>
-        </article>
-        <article class="note reveal">
-          <h3 class="accent">점은 황동</h3>
-          <p>황동색은 면을 채우지 않습니다. 숫자 하나, 그래프의 한 점에만 놓여 시선의 착지점을 만듭니다.</p>
-        </article>
-        <article class="note reveal">
-          <h3>어둠에서도 같다</h3>
-          <p>다크 모드에서는 흰 글씨가 중심이 되고, 두 색은 데이터의 강조와 그 아래 번지는 빛으로만 남습니다.</p>
-        </article>
-      </div>
-      <p class="wordmark reveal">TONE GRADIENT SILENCE</p>
-    </section>
-
-    <section class="band">
-      <p class="index reveal">04</p>
       <h2 class="head reveal">데이터</h2>
       <p class="lede reveal">
-        축선도 눈금선도 두지 않습니다. 값은 숫자로 직접 말하고,
-        선과 기둥은 아래로 갈수록 배경에 녹으며 그 아래에 빛을 남깁니다.
-        아래 수치는 예시 데이터입니다.
+        그래프는 한 단 낮은 면 위에 놓입니다. 능선의 윗면은 빛을 받고 아랫면은
+        그늘을 지며, 지금 보고 있는 구간만 색을 가집니다. 수치는 예시 데이터입니다.
       </p>
 
       <figure class="chart reveal">
         <figcaption>
           <span class="c-title">월별 밀도</span>
-          <span class="c-note">2026 · 12개월 · 지표 0 – 100</span>
+          <span class="c-read" id="rangeRead">6월 – 10월 · 평균 <b>64.8</b></span>
         </figcaption>
-        <svg class="c-area" viewBox="0 0 880 320" role="img" aria-label="월별 밀도 추이, 34에서 95까지 상승">
-          <path class="fill" mask="url(#fadeEdges)" fill="url(#areaFill)" d="M 30.0 195.2 C 54.8 190.1 79.7 181.3 104.5 179.8 C 129.4 178.3 154.2 189.3 179.1 186.4 C 203.9 183.5 228.8 169.5 253.6 162.2 C 278.5 154.9 303.3 144.2 328.2 142.4 C 353.0 140.6 377.9 153.0 402.7 151.2 C 427.6 149.4 452.4 138.0 477.3 131.4 C 502.1 124.8 527.0 113.8 551.8 111.6 C 576.7 109.4 601.5 121.1 626.4 118.2 C 651.2 115.3 676.1 100.2 700.9 94.0 C 725.8 87.8 750.6 86.3 775.5 80.8 C 800.3 75.3 825.2 67.6 850.0 61.0 L 850.0 320 L 30.0 320 Z" />
-          <path class="stroke" fill="none" stroke="url(#areaLine)" stroke-width="2" stroke-linecap="round" d="M 30.0 195.2 C 54.8 190.1 79.7 181.3 104.5 179.8 C 129.4 178.3 154.2 189.3 179.1 186.4 C 203.9 183.5 228.8 169.5 253.6 162.2 C 278.5 154.9 303.3 144.2 328.2 142.4 C 353.0 140.6 377.9 153.0 402.7 151.2 C 427.6 149.4 452.4 138.0 477.3 131.4 C 502.1 124.8 527.0 113.8 551.8 111.6 C 576.7 109.4 601.5 121.1 626.4 118.2 C 651.2 115.3 676.1 100.2 700.9 94.0 C 725.8 87.8 750.6 86.3 775.5 80.8 C 800.3 75.3 825.2 67.6 850.0 61.0" />
-          <circle class="dot" cx="850" cy="61" r="4.5" />
-          <text class="v-peak" x="850" y="38" text-anchor="end">95</text>
-          <text class="v-base" x="30" y="222" text-anchor="start">34</text>
-          <text class="v-axis" x="30" y="300">1월</text>
-          <text class="v-axis" x="440" y="300" text-anchor="middle">6월</text>
-          <text class="v-axis" x="850" y="300" text-anchor="end">12월</text>
-        </svg>
+
+        <div class="well">
+          <svg class="c-area" viewBox="30 0 820 300" role="img" aria-label="월별 밀도 추이, 34에서 95까지 상승">
+            <path class="face" fill="url(#plateau)" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0 L 850.0 300 L 30.0 300 Z" />
+            <path class="ridge-shade" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+            <path class="ridge-lit" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+            <path class="ridge" fill="none" d="M 30.0 185.2 C 54.8 180.1 79.7 171.3 104.5 169.8 C 129.4 168.3 154.2 179.3 179.1 176.4 C 203.9 173.5 228.8 159.5 253.6 152.2 C 278.5 144.9 303.3 134.2 328.2 132.4 C 353.0 130.6 377.9 143.0 402.7 141.2 C 427.6 139.4 452.4 128.0 477.3 121.4 C 502.1 114.8 527.0 103.8 551.8 101.6 C 576.7 99.4 601.5 111.1 626.4 108.2 C 651.2 105.3 676.1 90.2 700.9 84.0 C 725.8 77.8 750.6 76.3 775.5 70.8 C 800.3 65.3 825.2 57.6 850.0 51.0" />
+
+            <line class="cursor cursor-a" x1="341.6" y1="0" x2="341.6" y2="300" />
+            <line class="cursor cursor-b" x1="669.6" y1="0" x2="669.6" y2="300" />
+            <circle class="cursor-dot cursor-dot-a" cx="341.6" cy="139.0" r="3.4" />
+            <circle class="cursor-dot cursor-dot-b" cx="669.6" cy="97.0" r="3.4" />
+
+            <text class="v-axis" x="46" y="284">1월</text>
+            <text class="v-axis" x="440" y="284" text-anchor="middle">6월</text>
+            <text class="v-axis" x="834" y="284" text-anchor="end">12월</text>
+          </svg>
+        </div>
+
+        <div class="rail" id="rangeRail">
+          <span class="rail-groove" aria-hidden="true"></span>
+          <span class="rail-fill" aria-hidden="true"></span>
+          <button type="button" class="knob" data-knob="a" style="--p: 38%"
+            role="slider" aria-label="구간 시작" aria-valuemin="1" aria-valuemax="12" aria-valuenow="5"></button>
+          <button type="button" class="knob" data-knob="b" style="--p: 78%"
+            role="slider" aria-label="구간 끝" aria-valuemin="1" aria-valuemax="12" aria-valuenow="10"></button>
+        </div>
       </figure>
 
       <div class="duo">
@@ -189,25 +143,28 @@
             <span class="c-title">구간 분포</span>
             <span class="c-note">9개 구간 · 상대값</span>
           </figcaption>
-          <svg class="c-cols" viewBox="0 0 880 230" role="img" aria-label="9개 구간의 상대 분포, 8번째 구간이 가장 높음">
-            <g fill="url(#colFill)">
-              <rect x="30.0" y="124.4" width="46" height="75.6" rx="23" />
-              <rect x="126.8" y="95.6" width="46" height="104.4" rx="23" />
-              <rect x="223.5" y="108.2" width="46" height="91.8" rx="23" />
-              <rect x="320.2" y="68.6" width="46" height="131.4" rx="23" />
-              <rect x="417.0" y="81.2" width="46" height="118.8" rx="23" />
-              <rect x="513.8" y="41.6" width="46" height="158.4" rx="23" />
-              <rect x="610.5" y="57.8" width="46" height="142.2" rx="23" />
-              <rect class="is-peak" x="707.2" y="30.8" width="46" height="169.2" rx="23" fill="url(#colPeak)" />
-              <rect x="804.0" y="90.2" width="46" height="109.8" rx="23" />
-            </g>
-            <text class="v-peak" x="730.2" y="20" text-anchor="middle">94</text>
-          </svg>
+          <div class="well well-flat">
+            <svg class="c-cols" viewBox="0 0 880 230" role="img" aria-label="9개 구간의 상대 분포, 8번째 구간이 가장 높음">
+              <g>
+                <rect x="30.0" y="124.4" width="46" height="75.6" rx="23" />
+                <rect x="126.8" y="95.6" width="46" height="104.4" rx="23" />
+                <rect x="223.5" y="108.2" width="46" height="91.8" rx="23" />
+                <rect x="320.2" y="68.6" width="46" height="131.4" rx="23" />
+                <rect x="417.0" y="81.2" width="46" height="118.8" rx="23" />
+                <rect x="513.8" y="41.6" width="46" height="158.4" rx="23" />
+                <rect x="610.5" y="57.8" width="46" height="142.2" rx="23" />
+                <rect class="is-peak" x="707.2" y="30.8" width="46" height="169.2" rx="23" />
+                <rect x="804.0" y="90.2" width="46" height="109.8" rx="23" />
+              </g>
+              <text class="v-peak" x="730.2" y="20" text-anchor="middle">94</text>
+            </svg>
+          </div>
         </figure>
 
         <div class="gauges reveal">
           <figure class="gauge">
             <svg viewBox="0 0 140 140" role="img" aria-label="정합도 68퍼센트">
+              <path class="track-lit" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="track" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="value" d="M 31.82 108.18 A 54 54 0 1 1 110.51 34.29" />
               <text class="g-num" x="70" y="76" text-anchor="middle">68</text>
@@ -216,6 +173,7 @@
           </figure>
           <figure class="gauge">
             <svg viewBox="0 0 140 140" role="img" aria-label="분산도 41퍼센트">
+              <path class="track-lit" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="track" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="value" d="M 31.82 108.18 A 54 54 0 0 1 47.78 20.78" />
               <text class="g-num" x="70" y="76" text-anchor="middle">41</text>
@@ -224,6 +182,7 @@
           </figure>
           <figure class="gauge is-accent">
             <svg viewBox="0 0 140 140" role="img" aria-label="가독성 86퍼센트">
+              <path class="track-lit" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="track" d="M 31.82 108.18 A 54 54 0 1 1 108.18 108.18" />
               <path class="value" d="M 31.82 108.18 A 54 54 0 1 1 123.57 76.77" />
               <text class="g-num" x="70" y="76" text-anchor="middle">86</text>
@@ -235,84 +194,140 @@
     </section>
 
     <section class="band">
-      <p class="index reveal">05</p>
-      <h2 class="head reveal">표</h2>
+      <p class="index reveal">03</p>
+      <h2 class="head reveal">조작</h2>
       <p class="lede reveal">
-        괘선을 하나도 쓰지 않습니다. 열은 정렬로, 행은 간격으로 구분되며
-        추세는 행마다 같은 언어의 작은 면적 그래프로 놓입니다.
+        만질 수 있는 것은 한 단 올라와 있고, 값이 담기는 곳은 한 단 내려가 있습니다.
+        누르면 올라온 면이 눌리고, 켜지면 그때 색이 들어옵니다.
       </p>
-      <table class="sheet reveal">
-        <caption class="a11y">요소별 비중과 변화, 8구간 추세 (예시 데이터)</caption>
-        <thead>
-          <tr>
-            <th scope="col">요소</th>
-            <th scope="col" class="num">비중</th>
-            <th scope="col" class="num">변화</th>
-            <th scope="col" class="spark-col">추세</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">여백</th>
-            <td class="num">38.2</td>
-            <td class="num up">+4.1</td>
-            <td class="spark-col">
-              <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="여백 추세, 완만한 상승">
-                <path class="s-fill" mask="url(#fadeEdges)" fill="url(#sparkFill)" d="M 4.0 24.4 C 13.1 23.8 22.3 22.8 31.4 22.6 C 40.6 22.5 49.7 23.8 58.9 23.5 C 68.0 23.2 77.1 21.8 86.3 21.1 C 95.4 20.5 104.6 20.1 113.7 19.6 C 122.9 19.2 132.0 18.9 141.1 18.4 C 150.3 17.9 159.4 17.1 168.6 16.6 C 177.7 16.1 186.9 15.8 196.0 15.4 L 196.0 44 L 4.0 44 Z" />
-                <path class="s-line" fill="none" stroke="url(#areaLine)" stroke-width="1.6" stroke-linecap="round" d="M 4.0 24.4 C 13.1 23.8 22.3 22.8 31.4 22.6 C 40.6 22.5 49.7 23.8 58.9 23.5 C 68.0 23.2 77.1 21.8 86.3 21.1 C 95.4 20.5 104.6 20.1 113.7 19.6 C 122.9 19.2 132.0 18.9 141.1 18.4 C 150.3 17.9 159.4 17.1 168.6 16.6 C 177.7 16.1 186.9 15.8 196.0 15.4" />
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">서체</th>
-            <td class="num">27.5</td>
-            <td class="num up">+1.8</td>
-            <td class="spark-col">
-              <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="서체 추세, 완만한 상승">
-                <path class="s-fill" mask="url(#fadeEdges)" fill="url(#sparkFill)" d="M 4.0 28.0 C 13.1 27.6 22.3 27.2 31.4 26.8 C 40.6 26.4 49.7 25.7 58.9 25.6 C 68.0 25.5 77.1 26.4 86.3 26.2 C 95.4 26.0 104.6 25.0 113.7 24.4 C 122.9 23.8 132.0 23.0 141.1 22.6 C 150.3 22.2 159.4 22.3 168.6 22.0 C 177.7 21.7 186.9 21.2 196.0 20.8 L 196.0 44 L 4.0 44 Z" />
-                <path class="s-line" fill="none" stroke="url(#areaLine)" stroke-width="1.6" stroke-linecap="round" d="M 4.0 28.0 C 13.1 27.6 22.3 27.2 31.4 26.8 C 40.6 26.4 49.7 25.7 58.9 25.6 C 68.0 25.5 77.1 26.4 86.3 26.2 C 95.4 26.0 104.6 25.0 113.7 24.4 C 122.9 23.8 132.0 23.0 141.1 22.6 C 150.3 22.2 159.4 22.3 168.6 22.0 C 177.7 21.7 186.9 21.2 196.0 20.8" />
-              </svg>
-            </td>
-          </tr>
-          <tr class="is-accent">
-            <th scope="row">색수차</th>
-            <td class="num accent">19.4</td>
-            <td class="num up accent">+9.6</td>
-            <td class="spark-col">
-              <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="색수차 추세, 가파른 상승">
-                <path class="s-fill" mask="url(#fadeEdges)" fill="url(#sparkFillAccent)" d="M 4.0 37.6 C 13.1 37.2 22.3 36.9 31.4 36.4 C 40.6 35.9 49.7 35.2 58.9 34.6 C 68.0 34.0 77.1 33.4 86.3 32.8 C 95.4 32.2 104.6 31.7 113.7 31.0 C 122.9 30.3 132.0 29.3 141.1 28.6 C 150.3 27.9 159.4 27.2 168.6 26.8 C 177.7 26.4 186.9 26.2 196.0 25.9 L 196.0 44 L 4.0 44 Z" />
-                <path class="s-line" fill="none" stroke-width="1.6" stroke-linecap="round" d="M 4.0 37.6 C 13.1 37.2 22.3 36.9 31.4 36.4 C 40.6 35.9 49.7 35.2 58.9 34.6 C 68.0 34.0 77.1 33.4 86.3 32.8 C 95.4 32.2 104.6 31.7 113.7 31.0 C 122.9 30.3 132.0 29.3 141.1 28.6 C 150.3 27.9 159.4 27.2 168.6 26.8 C 177.7 26.4 186.9 26.2 196.0 25.9" />
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">그라디언트</th>
-            <td class="num">10.7</td>
-            <td class="num down">−0.9</td>
-            <td class="spark-col">
-              <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="그라디언트 추세, 거의 평탄">
-                <path class="s-fill" mask="url(#fadeEdges)" fill="url(#sparkFill)" d="M 4.0 29.8 C 13.1 29.9 22.3 30.0 31.4 30.1 C 40.6 30.2 49.7 30.6 58.9 30.7 C 68.0 30.9 77.1 30.9 86.3 31.0 C 95.4 31.1 104.6 31.3 113.7 31.3 C 122.9 31.3 132.0 30.9 141.1 31.0 C 150.3 31.1 159.4 31.6 168.6 31.6 C 177.7 31.7 186.9 31.4 196.0 31.3 L 196.0 44 L 4.0 44 Z" />
-                <path class="s-line" fill="none" stroke="url(#areaLine)" stroke-width="1.6" stroke-linecap="round" d="M 4.0 29.8 C 13.1 29.9 22.3 30.0 31.4 30.1 C 40.6 30.2 49.7 30.6 58.9 30.7 C 68.0 30.9 77.1 30.9 86.3 31.0 C 95.4 31.1 104.6 31.3 113.7 31.3 C 122.9 31.3 132.0 30.9 141.1 31.0 C 150.3 31.1 159.4 31.6 168.6 31.6 C 177.7 31.7 186.9 31.4 196.0 31.3" />
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">테두리</th>
-            <td class="num">0.0</td>
-            <td class="num down">−12.4</td>
-            <td class="spark-col">
-              <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="테두리 추세, 0으로 하락">
-                <path class="s-fill" mask="url(#fadeEdges)" fill="url(#sparkFill)" d="M 4.0 32.2 C 13.1 32.8 22.3 33.4 31.4 34.0 C 40.6 34.6 49.7 35.3 58.9 35.8 C 68.0 36.3 77.1 36.6 86.3 37.0 C 95.4 37.4 104.6 37.9 113.7 38.2 C 122.9 38.5 132.0 38.6 141.1 38.8 C 150.3 39.0 159.4 39.4 168.6 39.4 C 177.7 39.4 186.9 39.4 196.0 39.4 L 196.0 44 L 4.0 44 Z" />
-                <path class="s-line" fill="none" stroke="url(#areaLine)" stroke-width="1.6" stroke-linecap="round" d="M 4.0 32.2 C 13.1 32.8 22.3 33.4 31.4 34.0 C 40.6 34.6 49.7 35.3 58.9 35.8 C 68.0 36.3 77.1 36.6 86.3 37.0 C 95.4 37.4 104.6 37.9 113.7 38.2 C 122.9 38.5 132.0 38.6 141.1 38.8 C 150.3 39.0 159.4 39.4 168.6 39.4 C 177.7 39.4 186.9 39.4 196.0 39.4" />
-              </svg>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <div class="controls reveal">
+        <div class="ctl">
+          <p class="ctl-label">슬라이더</p>
+          <div class="rail rail-solo" id="soloRail">
+            <span class="rail-groove" aria-hidden="true"></span>
+            <span class="rail-fill" aria-hidden="true"></span>
+            <button type="button" class="knob" data-knob="solo" style="--p: 62%"
+              role="slider" aria-label="밀도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62"></button>
+          </div>
+          <p class="ctl-value" id="soloRead">62</p>
+        </div>
+
+        <div class="ctl">
+          <p class="ctl-label">스위치</p>
+          <div class="switch-row">
+            <button type="button" class="switch is-on" role="switch" aria-checked="true" aria-label="색수차">
+              <span class="switch-thumb"></span>
+            </button>
+            <span class="switch-text">색수차</span>
+          </div>
+          <div class="switch-row">
+            <button type="button" class="switch" role="switch" aria-checked="false" aria-label="눈금선">
+              <span class="switch-thumb"></span>
+            </button>
+            <span class="switch-text">눈금선</span>
+          </div>
+        </div>
+
+        <div class="ctl">
+          <p class="ctl-label">분할 선택</p>
+          <div class="segment segment-wide" role="group" aria-label="보기 단위">
+            <span class="segment-thumb" aria-hidden="true"></span>
+            <button type="button" class="segment-pick is-on">일</button>
+            <button type="button" class="segment-pick">주</button>
+            <button type="button" class="segment-pick">월</button>
+          </div>
+          <p class="ctl-note">눌린 칸만 한 단 내려갑니다</p>
+        </div>
+      </div>
     </section>
 
     <section class="band">
-      <p class="index reveal">06</p>
+      <p class="index reveal">04</p>
+      <h2 class="head reveal">표</h2>
+      <p class="lede reveal">
+        괘선은 없습니다. 머리글과 본문 사이에만 한 줄의 단차를 새기고,
+        추세는 행마다 같은 언어의 작은 능선으로 놓습니다.
+      </p>
+      <div class="sheet-wrap reveal">
+        <table class="sheet">
+          <caption class="a11y">요소별 비중과 변화, 8구간 추세 (예시 데이터)</caption>
+          <thead>
+            <tr>
+              <th scope="col">요소</th>
+              <th scope="col" class="num">비중</th>
+              <th scope="col" class="num">변화</th>
+              <th scope="col" class="spark-col">추세</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">여백</th>
+              <td class="num">38.2</td>
+              <td class="num up">+4.1</td>
+              <td class="spark-col">
+                <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="여백 추세, 완만한 상승">
+                  <path class="s-face" mask="url(#fadeEdges)" d="M 4.0 24.4 C 13.1 23.8 22.3 22.8 31.4 22.6 C 40.6 22.5 49.7 23.8 58.9 23.5 C 68.0 23.2 77.1 21.8 86.3 21.1 C 95.4 20.5 104.6 20.1 113.7 19.6 C 122.9 19.2 132.0 18.9 141.1 18.4 C 150.3 17.9 159.4 17.1 168.6 16.6 C 177.7 16.1 186.9 15.8 196.0 15.4 L 196.0 44 L 4.0 44 Z" />
+                  <path class="s-lit" fill="none" d="M 4.0 24.4 C 13.1 23.8 22.3 22.8 31.4 22.6 C 40.6 22.5 49.7 23.8 58.9 23.5 C 68.0 23.2 77.1 21.8 86.3 21.1 C 95.4 20.5 104.6 20.1 113.7 19.6 C 122.9 19.2 132.0 18.9 141.1 18.4 C 150.3 17.9 159.4 17.1 168.6 16.6 C 177.7 16.1 186.9 15.8 196.0 15.4" />
+                  <path class="s-line" fill="none" d="M 4.0 24.4 C 13.1 23.8 22.3 22.8 31.4 22.6 C 40.6 22.5 49.7 23.8 58.9 23.5 C 68.0 23.2 77.1 21.8 86.3 21.1 C 95.4 20.5 104.6 20.1 113.7 19.6 C 122.9 19.2 132.0 18.9 141.1 18.4 C 150.3 17.9 159.4 17.1 168.6 16.6 C 177.7 16.1 186.9 15.8 196.0 15.4" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">서체</th>
+              <td class="num">27.5</td>
+              <td class="num up">+1.8</td>
+              <td class="spark-col">
+                <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="서체 추세, 완만한 상승">
+                  <path class="s-face" mask="url(#fadeEdges)" d="M 4.0 28.0 C 13.1 27.6 22.3 27.2 31.4 26.8 C 40.6 26.4 49.7 25.7 58.9 25.6 C 68.0 25.5 77.1 26.4 86.3 26.2 C 95.4 26.0 104.6 25.0 113.7 24.4 C 122.9 23.8 132.0 23.0 141.1 22.6 C 150.3 22.2 159.4 22.3 168.6 22.0 C 177.7 21.7 186.9 21.2 196.0 20.8 L 196.0 44 L 4.0 44 Z" />
+                  <path class="s-lit" fill="none" d="M 4.0 28.0 C 13.1 27.6 22.3 27.2 31.4 26.8 C 40.6 26.4 49.7 25.7 58.9 25.6 C 68.0 25.5 77.1 26.4 86.3 26.2 C 95.4 26.0 104.6 25.0 113.7 24.4 C 122.9 23.8 132.0 23.0 141.1 22.6 C 150.3 22.2 159.4 22.3 168.6 22.0 C 177.7 21.7 186.9 21.2 196.0 20.8" />
+                  <path class="s-line" fill="none" d="M 4.0 28.0 C 13.1 27.6 22.3 27.2 31.4 26.8 C 40.6 26.4 49.7 25.7 58.9 25.6 C 68.0 25.5 77.1 26.4 86.3 26.2 C 95.4 26.0 104.6 25.0 113.7 24.4 C 122.9 23.8 132.0 23.0 141.1 22.6 C 150.3 22.2 159.4 22.3 168.6 22.0 C 177.7 21.7 186.9 21.2 196.0 20.8" />
+                </svg>
+              </td>
+            </tr>
+            <tr class="is-accent">
+              <th scope="row">색수차</th>
+              <td class="num accent">19.4</td>
+              <td class="num up accent">+9.6</td>
+              <td class="spark-col">
+                <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="색수차 추세, 가파른 상승">
+                  <path class="s-face" mask="url(#fadeEdges)" d="M 4.0 37.6 C 13.1 37.2 22.3 36.9 31.4 36.4 C 40.6 35.9 49.7 35.2 58.9 34.6 C 68.0 34.0 77.1 33.4 86.3 32.8 C 95.4 32.2 104.6 31.7 113.7 31.0 C 122.9 30.3 132.0 29.3 141.1 28.6 C 150.3 27.9 159.4 27.2 168.6 26.8 C 177.7 26.4 186.9 26.2 196.0 25.9 L 196.0 44 L 4.0 44 Z" />
+                  <path class="s-lit" fill="none" d="M 4.0 37.6 C 13.1 37.2 22.3 36.9 31.4 36.4 C 40.6 35.9 49.7 35.2 58.9 34.6 C 68.0 34.0 77.1 33.4 86.3 32.8 C 95.4 32.2 104.6 31.7 113.7 31.0 C 122.9 30.3 132.0 29.3 141.1 28.6 C 150.3 27.9 159.4 27.2 168.6 26.8 C 177.7 26.4 186.9 26.2 196.0 25.9" />
+                  <path class="s-line" fill="none" d="M 4.0 37.6 C 13.1 37.2 22.3 36.9 31.4 36.4 C 40.6 35.9 49.7 35.2 58.9 34.6 C 68.0 34.0 77.1 33.4 86.3 32.8 C 95.4 32.2 104.6 31.7 113.7 31.0 C 122.9 30.3 132.0 29.3 141.1 28.6 C 150.3 27.9 159.4 27.2 168.6 26.8 C 177.7 26.4 186.9 26.2 196.0 25.9" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">그라디언트</th>
+              <td class="num">10.7</td>
+              <td class="num down">−0.9</td>
+              <td class="spark-col">
+                <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="그라디언트 추세, 거의 평탄">
+                  <path class="s-face" mask="url(#fadeEdges)" d="M 4.0 29.8 C 13.1 29.9 22.3 30.0 31.4 30.1 C 40.6 30.2 49.7 30.6 58.9 30.7 C 68.0 30.9 77.1 30.9 86.3 31.0 C 95.4 31.1 104.6 31.3 113.7 31.3 C 122.9 31.3 132.0 30.9 141.1 31.0 C 150.3 31.1 159.4 31.6 168.6 31.6 C 177.7 31.7 186.9 31.4 196.0 31.3 L 196.0 44 L 4.0 44 Z" />
+                  <path class="s-lit" fill="none" d="M 4.0 29.8 C 13.1 29.9 22.3 30.0 31.4 30.1 C 40.6 30.2 49.7 30.6 58.9 30.7 C 68.0 30.9 77.1 30.9 86.3 31.0 C 95.4 31.1 104.6 31.3 113.7 31.3 C 122.9 31.3 132.0 30.9 141.1 31.0 C 150.3 31.1 159.4 31.6 168.6 31.6 C 177.7 31.7 186.9 31.4 196.0 31.3" />
+                  <path class="s-line" fill="none" d="M 4.0 29.8 C 13.1 29.9 22.3 30.0 31.4 30.1 C 40.6 30.2 49.7 30.6 58.9 30.7 C 68.0 30.9 77.1 30.9 86.3 31.0 C 95.4 31.1 104.6 31.3 113.7 31.3 C 122.9 31.3 132.0 30.9 141.1 31.0 C 150.3 31.1 159.4 31.6 168.6 31.6 C 177.7 31.7 186.9 31.4 196.0 31.3" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">테두리</th>
+              <td class="num">0.0</td>
+              <td class="num down">−12.4</td>
+              <td class="spark-col">
+                <svg class="spark" viewBox="0 0 200 44" role="img" aria-label="테두리 추세, 0으로 하락">
+                  <path class="s-face" mask="url(#fadeEdges)" d="M 4.0 32.2 C 13.1 32.8 22.3 33.4 31.4 34.0 C 40.6 34.6 49.7 35.3 58.9 35.8 C 68.0 36.3 77.1 36.6 86.3 37.0 C 95.4 37.4 104.6 37.9 113.7 38.2 C 122.9 38.5 132.0 38.6 141.1 38.8 C 150.3 39.0 159.4 39.4 168.6 39.4 C 177.7 39.4 186.9 39.4 196.0 39.4 L 196.0 44 L 4.0 44 Z" />
+                  <path class="s-lit" fill="none" d="M 4.0 32.2 C 13.1 32.8 22.3 33.4 31.4 34.0 C 40.6 34.6 49.7 35.3 58.9 35.8 C 68.0 36.3 77.1 36.6 86.3 37.0 C 95.4 37.4 104.6 37.9 113.7 38.2 C 122.9 38.5 132.0 38.6 141.1 38.8 C 150.3 39.0 159.4 39.4 168.6 39.4 C 177.7 39.4 186.9 39.4 196.0 39.4" />
+                  <path class="s-line" fill="none" d="M 4.0 32.2 C 13.1 32.8 22.3 33.4 31.4 34.0 C 40.6 34.6 49.7 35.3 58.9 35.8 C 68.0 36.3 77.1 36.6 86.3 37.0 C 95.4 37.4 104.6 37.9 113.7 38.2 C 122.9 38.5 132.0 38.6 141.1 38.8 C 150.3 39.0 159.4 39.4 168.6 39.4 C 177.7 39.4 186.9 39.4 196.0 39.4" />
+                </svg>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="index reveal">05</p>
       <h2 class="head reveal">여백의 박자</h2>
       <div class="rhythm">
         <p class="r r-1 reveal">가까움</p>
@@ -321,14 +336,15 @@
         <p class="r r-4 reveal">단절</p>
       </div>
       <p class="lede reveal">
-        네 단계의 간격만으로 문서 전체의 구조가 설명됩니다. 더 필요한 장치는 없습니다.
+        네 단계의 간격이 먼저이고, 단차는 그다음입니다. 간격으로 설명되는 것에는
+        그림자를 쓰지 않습니다.
       </p>
     </section>
   </main>
 
   <footer class="foot">
     <p class="reveal">형태 없는 결 · 디자인 프리뷰</p>
-    <p class="meta reveal">테두리 없음 · 괘선 없음 · 톤과 빛만</p>
+    <p class="meta reveal">무채색 바탕 · 테두리 없음 · 단차와 포인트 색</p>
   </footer>
 
   <script src="app.js"></script>
