@@ -77,33 +77,15 @@
       sw.classList.toggle("is-on", on);
       sw.setAttribute("aria-checked", String(on));
       if (sw.getAttribute("aria-label") === "색수차") {
-        document.querySelectorAll(".c-area .face, .gauge .value").forEach(function (el) {
+        document.querySelectorAll(".c-area .face").forEach(function (el) {
           el.style.filter = on ? "" : "none";
         });
       }
     });
   });
 
-  /* ── 구간 손잡이 ───────────────────────────────────────── */
-  var VALUES = [34, 41, 38, 49, 58, 54, 63, 72, 69, 80, 86, 95];
-  var MONTHS = VALUES.length;
-  var PLOT_X0 = 30;
-  var PLOT_W = 820;
-  var PLOT_TOP = 51;   /* 값 95의 y */
-  var PLOT_UNIT = 2.2; /* 값 1당 y 변화 */
-
-  function valueAt(p) {
-    var t = p * (MONTHS - 1);
-    var i = Math.min(Math.floor(t), MONTHS - 2);
-    var f = t - i;
-    return VALUES[i] + (VALUES[i + 1] - VALUES[i]) * f;
-  }
-
-  function yAt(v) {
-    return PLOT_TOP + (95 - v) * PLOT_UNIT;
-  }
-
-  function setupRail(rail, opts) {
+  /* ── 슬라이더 ──────────────────────────────────────────── */
+  function setupRail(rail, onChange) {
     if (!rail) return;
     var knobs = Array.prototype.slice.call(rail.querySelectorAll(".knob"));
     var fill = rail.querySelector(".rail-fill");
@@ -115,25 +97,12 @@
       knobs.forEach(function (k, i) {
         k.style.setProperty("--p", (pos[i] * 100).toFixed(2) + "%");
       });
-      if (fill) {
-        if (knobs.length > 1) {
-          fill.style.left = (pos[0] * 100).toFixed(2) + "%";
-          fill.style.right = ((1 - pos[1]) * 100).toFixed(2) + "%";
-        } else {
-          fill.style.right = ((1 - pos[0]) * 100).toFixed(2) + "%";
-        }
-      }
-      opts.onChange(pos, knobs);
+      if (fill) fill.style.right = ((1 - pos[0]) * 100).toFixed(2) + "%";
+      onChange(pos, knobs);
     }
 
     function move(i, p) {
-      p = Math.min(1, Math.max(0, p));
-      if (knobs.length > 1) {
-        if (i === 0) p = Math.min(p, pos[1] - 0.06);
-        else p = Math.max(p, pos[0] + 0.06);
-        p = Math.min(1, Math.max(0, p));
-      }
-      pos[i] = p;
+      pos[i] = Math.min(1, Math.max(0, p));
       paint();
     }
 
@@ -153,7 +122,7 @@
         });
       });
       knob.addEventListener("keydown", function (e) {
-        var step = e.shiftKey ? 0.1 : 1 / (MONTHS - 1);
+        var step = e.shiftKey ? 0.1 : 0.01;
         if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
           move(i, pos[i] - step);
           e.preventDefault();
@@ -167,52 +136,11 @@
     paint();
   }
 
-  var area = document.querySelector(".c-area");
-  setupRail(document.getElementById("rangeRail"), {
-    onChange: function (pos, knobs) {
-      if (!area) return;
-      var railBox = document.getElementById("rangeRail").getBoundingClientRect();
-      var inset = railBox.width ? 13 / railBox.width : 0;
-      ["a", "b"].forEach(function (key, i) {
-        var x = PLOT_X0 + PLOT_W * (inset + pos[i] * (1 - 2 * inset));
-        var v = valueAt(pos[i]);
-        var line = area.querySelector(".cursor-" + key);
-        var dot = area.querySelector(".cursor-dot-" + key);
-        if (line) {
-          line.setAttribute("x1", x.toFixed(1));
-          line.setAttribute("x2", x.toFixed(1));
-        }
-        if (dot) {
-          dot.setAttribute("cx", x.toFixed(1));
-          dot.setAttribute("cy", yAt(v).toFixed(1));
-        }
-        var month = Math.round(pos[i] * (MONTHS - 1)) + 1;
-        knobs[i].setAttribute("aria-valuenow", String(month));
-        knobs[i].setAttribute("aria-valuetext", month + "월");
-      });
-      var read = document.getElementById("rangeRead");
-      if (read) {
-        var m1 = Math.round(pos[0] * (MONTHS - 1)) + 1;
-        var m2 = Math.round(pos[1] * (MONTHS - 1)) + 1;
-        var sum = 0;
-        var n = 0;
-        for (var m = m1; m <= m2; m++) {
-          sum += VALUES[m - 1];
-          n++;
-        }
-        read.innerHTML =
-          m1 + "월 – " + m2 + "월 · 평균 <b>" + (sum / n).toFixed(1) + "</b>";
-      }
-    }
-  });
-
   var soloRead = document.getElementById("soloRead");
-  setupRail(document.getElementById("soloRail"), {
-    onChange: function (pos, knobs) {
-      var v = Math.round(pos[0] * 100);
-      if (soloRead) soloRead.textContent = String(v);
-      knobs[0].setAttribute("aria-valuenow", String(v));
-    }
+  setupRail(document.getElementById("soloRail"), function (pos, knobs) {
+    var v = Math.round(pos[0] * 100);
+    if (soloRead) soloRead.textContent = String(v);
+    knobs[0].setAttribute("aria-valuenow", String(v));
   });
 
   /* ── 스크롤 등장 ───────────────────────────────────────── */
