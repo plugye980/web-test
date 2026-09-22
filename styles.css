@@ -37,12 +37,13 @@
   --page-b: #212429;
   --page-c: #262a30;
   --surface: #25282d;
-  --well: #1e2025;
-  --face-a: #191b1f;
-  --face-b: #131518;
+  --well: #15171a;
+  --face-a: #343a42;
+  --face-b: #1d2024;
   --ridge: #3d424a;
   --sky-b: #5e93b9;
   --brass-b: #b08a4f;
+  --tag: rgba(255, 255, 255, 0.08);
 
   --hi: rgba(255, 255, 255, 0.055);
   --hi-strong: rgba(255, 255, 255, 0.10);
@@ -50,7 +51,7 @@
   --lo-strong: rgba(0, 0, 0, 0.7);
 
   --ridge-lit: rgba(255, 255, 255, 0.4);
-  --ridge-shade: rgba(0, 0, 0, 0.6);
+  --ridge-shade: rgba(0, 0, 0, 0.75);
   --r1: #6f9dbb;
   --r2: #99a4b1;
   --r3: #c49c5f;
@@ -80,28 +81,29 @@
 
 /* 라이트 — 푸른 기운이 도는 밝은 흰색 바탕 */
 :root[data-theme="light"] {
-  --page-a: #f0f9ff;
-  --page-b: #f7fdff;
-  --page-c: #e9f4fd;
-  --surface: #f5fcff;
-  --well: #eaf4fc;
-  --face-a: #e3edf7;
-  --face-b: #d6e5f1;
-  --ridge: #c2d2e0;
+  --page-a: #f5fbff;
+  --page-b: #fbfeff;
+  --page-c: #eff7fe;
+  --surface: #fafeff;
+  --well: #dfeaf6;
+  --face-a: #ffffff;
+  --face-b: #eef5fc;
+  --ridge: #ccdae7;
   --sky-b: #3a749a;
   --brass-b: #7d5f27;
+  --tag: rgba(66, 104, 140, 0.14);
 
   --hi: rgba(255, 255, 255, 1);
   --hi-strong: #ffffff;
-  --lo: rgba(120, 158, 196, 0.3);
-  --lo-strong: rgba(104, 145, 186, 0.42);
+  --lo: rgba(124, 164, 204, 0.24);
+  --lo-strong: rgba(110, 152, 194, 0.34);
 
   --ridge-lit: rgba(255, 255, 255, 1);
-  --ridge-shade: rgba(120, 155, 190, 0.5);
+  --ridge-shade: rgba(88, 128, 170, 0.62);
   --r1: #6f9cbb;
   --r2: #a8b8c5;
   --r3: #ad8a4e;
-  --groove: #dcebf7;
+  --groove: #e7f2fb;
   --sky-glow: rgba(58, 134, 186, 0.5);
   --brass-glow: rgba(150, 110, 38, 0.45);
 
@@ -109,18 +111,18 @@
   --text-b: #42525f;
   --body-a: #53616c;
   --body-b: #6c7a86;
-  --dim-a: #8ba0ad;
-  --dim-b: #a9bccb;
+  --dim-a: #8ea6b6;
+  --dim-b: #adc1d1;
 
   --sky: #4a8cb5;
   --brass: #9a7530;
   --sky-soft: rgba(74, 140, 181, 0.18);
   --brass-soft: rgba(154, 117, 48, 0.16);
 
-  --wash-1: rgba(110, 165, 205, 0.1);
-  --wash-2: rgba(180, 145, 85, 0.045);
+  --wash-1: rgba(115, 170, 210, 0.075);
+  --wash-2: rgba(185, 150, 90, 0.035);
 
-  --col-a: #6ba3c8;
+  --col-a: #7cb0d2;
   --col-acc: #a8813a;
   --spark-line: #9fb3c1;
 }
@@ -515,10 +517,10 @@ main,
 
 .ridge-shade {
   stroke: var(--ridge-shade);
-  stroke-width: 7;
+  stroke-width: 8;
   stroke-linecap: round;
-  transform: translateY(5px);
-  filter: blur(4px);
+  transform: translate(2px, 6px);
+  filter: blur(4.5px);
 }
 
 /* 지금 보고 있는 구간 */
@@ -531,12 +533,14 @@ main,
 .cursor-dot-a { fill: var(--sky); filter: drop-shadow(0 0 7px var(--sky-glow)); }
 .cursor-dot-b { fill: var(--brass); filter: drop-shadow(0 0 7px var(--brass-glow)); }
 
+.v-tag-sm { font-size: 26px; }
+
 .v-tag {
   font-family: var(--ui);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  fill: var(--dim-b);
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  fill: var(--tag);
 }
 
 .tip {
@@ -866,17 +870,27 @@ main,
   overflow: visible;
 }
 
-.spark .s-face { fill: var(--face-a); opacity: 0.95; }
+.spark .s-face { fill: url(#plateau); }
+.spark .s-shade {
+  fill: none;
+  stroke: var(--ridge-shade);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform: translate(1px, 3px);
+  filter: blur(2.5px);
+  opacity: 0.8;
+}
 .spark .s-lit {
+  fill: none;
   stroke: var(--ridge-lit);
-  stroke-width: 1.4;
-  transform: translateY(-1.2px);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  transform: translateY(-1.1px);
 }
 .spark .s-line {
   stroke: var(--spark-line);
-  stroke-width: 1.7;
+  stroke-width: 1.6;
   stroke-linecap: round;
-  filter: drop-shadow(0 2px 2px var(--lo));
 }
 .sheet tr.is-accent .s-line { stroke: var(--brass); opacity: 0.85; }
 
