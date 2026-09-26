@@ -45,8 +45,19 @@
 Pretendard를 jsDelivr CDN에서 불러옵니다. 오프라인이면 시스템 폰트로 대체되며
 레이아웃은 같습니다.
 
+## 다른 프로젝트에 가져다 쓰기
+
+`design/` 폴더만 넘기면 됩니다. 페이지 코드는 필요 없습니다.
+
+- `design/tokens.css` — 그대로 넣고 `data-theme`만 바꾸면 되는 CSS 변수
+  (다크·라이트 각 53개, 역할 주석 포함)
+- `design/tokens.json` — 웹이 아닌 곳(네이티브·Figma)으로 옮길 때 쓰는 같은 값
+- `design/RECIPES.md` — 단차 공식, 능선 네 겹의 순서와 오프셋, 계단·기둥·게이지·표의
+  레시피와 포팅 체크리스트
+
 ## 파일
 
 - `index.html` — 마크업과 SVG
 - `styles.css` — 색 토큰, 단차(raise/inset) 토큰, 레이아웃
 - `app.js` — 모드 전환, 슬라이더, 스위치·분할 선택, 스크롤 등장
+- `design/` — 다른 프로젝트로 옮길 때 쓰는 토큰과 레시피
